@@ -1,0 +1,7 @@
+verilog xil_defaultlib --include "../../../../Tiny_FPGA.gen/sources_1/ip/ila_0_1/hdl/verilog" \
+"../../../../Tiny_FPGA.gen/sources_1/ip/ila_0_1/sim/ila_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

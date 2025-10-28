@@ -1,0 +1,606 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Sep 10 13:07:00 2025
+# Process ID: 12376
+# Current directory: E:/FPGA/project/Tiny_FPGA
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8600 E:\FPGA\project\Tiny_FPGA\Tiny_FPGA.xpr
+# Log file: E:/FPGA/project/Tiny_FPGA/vivado.log
+# Journal file: E:/FPGA/project/Tiny_FPGA\vivado.jou
+# Running On: xixixi, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 10, Host memory: 34010 MB
+#-----------------------------------------------------------
+WARNING: [Runs 36-547] User Strategy 'Vivado Synthesis Defaults' from file 'C:\Users\cuiyu\AppData\Roaming/Xilinx/Vivado/2023.2/strategies/Vivado Synthesis Defaults.Vivado Synthesis 2020.psg' discarded because strategy with same name already parsed from 'E:/Xilinx/Vivado/2023.2/strategies/VDS2020.psg'
+start_guiWWARNING: [Board 49-26] cannot add Board Part xilinx.com:vermeo_t1_mpsoc:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vermeo_t1_mpsoc/1.0/board.xml as part xczu19eg-ffvd1760-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vermeo_t1_rfsoc:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vermeo_t1_rfsoc/1.0/board.xml as part xczu21dr-ffvd1156-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vhk158/production/1.0/board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.1 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vhk158/production/1.1/board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158_es:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vhk158/es/1.0/board.xml as part xcvh1582-vsva3697-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158_es:part0:1.1 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vhk158/es/1.1/board.xml as part xcvh1582-vsva3697-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vpk120/production/1.0/board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.1 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vpk120/production/1.1/board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.2 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vpk120/production/1.2/board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vpk180/production/1.0/board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.1 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vpk180/production/1.1/board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zc702:part0:1.4 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zc702/1.4/board.xml as part xc7z020clg484-1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zc706:part0:1.4 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zc706/1.4/board.xml as part xc7z045ffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu102:part0:3.3 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu102/3.3/board.xml as part xczu9eg-ffvb1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu102:part0:3.4 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu102/3.4/board.xml as part xczu9eg-ffvb1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu104:part0:1.1 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu104/1.1/board.xml as part xczu7ev-ffvc1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu106:part0:2.4 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu106/2.4/board.xml as part xczu7ev-ffvc1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu106:part0:2.5 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu106/2.5/board.xml as part xczu7ev-ffvc1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu106:part0:2.6 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu106/2.6/board.xml as part xczu7ev-ffvc1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.2 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu111/1.2/board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.3 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu111/1.3/board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.4 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu111/1.4/board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu1275:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu1275/1.0/board.xml as part xczu29dr-ffvf1760-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu1285:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu1285/1.0/board.xml as part xczu39dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208:part0:2.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu208/production/2.0/board.xml as part xczu48dr-fsvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208ld:part0:2.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu208ld/production/2.0/board.xml as part xczu58dr-fsvg1517-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216:part0:2.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu216/production/2.0/board.xml as part xczu49dr-ffvf1760-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu216ld/production/2.0/board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670/2.0/board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at E:/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670ld/1.0/board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not availableopen_project E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.xpr
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert.sv'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_dummy_macros.svh'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_sec_cm.svh'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_macros.sv'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.sv'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.sv'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.sv'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ADC_UDP_Top.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/Baseline_Volt_Cal.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/adc_core.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/crc32_d8.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop_2sync.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/reset_generator.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rgmii_tx.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rib_wr.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/SIPO_module/SIPO_module.srcs/sources_1/new/sipo_converter.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/top_ctrl.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_core.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_tx.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_fifo_async.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/gmii_to_rgmii.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/serial_to_parallel.v'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_yosys_macros.svh'.
+CRITICAL WARNING: [Project 1-19] Could not find the file 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_standard_macros.svh'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xilinx/Vivado/2023.2/data/ip'.
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ADC_UDP_Top.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/Baseline_Volt_Cal.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/adc_core.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/crc32_d8.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/gmii_to_rgmii.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop_2sync.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/reset_generator.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rgmii_tx.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rib_wr.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/serial_to_parallel.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/SIPO_module/SIPO_module.srcs/sources_1/new/sipo_converter.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/top_ctrl.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_core.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_tx.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_dummy_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_sec_cm.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_standard_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_yosys_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_macros.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_fifo_async.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.sv] -no_script -reset -force -quiet
+remove_files  {E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ADC_UDP_Top.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/Baseline_Volt_Cal.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/adc_core.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/crc32_d8.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/gmii_to_rgmii.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop_2sync.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/reset_generator.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rgmii_tx.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rib_wr.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/serial_to_parallel.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/SIPO_module/SIPO_module.srcs/sources_1/new/sipo_converter.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/top_ctrl.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_core.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_tx.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_dummy_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_sec_cm.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_standard_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_yosys_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_macros.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_fifo_async.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.sv}
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'tinyriscv_soc_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'E:/Xilinx/Vivado/2023.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tinyriscv_soc_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj tinyriscv_soc_tb_vlog.prj"
+ECHO 处于关闭状态。
+ECHO 处于关闭状态。
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/ADC_UDP_Top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ADC_UDP_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/Baseline_Volt_Cal.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Baseline_Volt_Cal
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/I2C_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module i2c_controller
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/SPI_master.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SPI_Master
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/SPI_warpper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module spi_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/adc_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module adc_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/clint.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clint
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/crc32_d8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module crc32_d8
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/csr_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module csr_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/divider.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module divider
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_alu_datapath.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_alu_datapath
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_commit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_commit
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_dispatch.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_dispatch
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_muldiv.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_muldiv
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/full_handshake_rx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module full_handshake_rx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/full_handshake_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module full_handshake_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_buf.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gen_ticks_sync
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_dff.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gen_pipe_dff
+INFO: [VRFC 10-311] analyzing module gen_rst_0_dff
+INFO: [VRFC 10-311] analyzing module gen_rst_1_dff
+INFO: [VRFC 10-311] analyzing module gen_rst_def_dff
+INFO: [VRFC 10-311] analyzing module gen_en_dff
+INFO: [VRFC 10-311] analyzing module gen_en_dffnr
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gen_ram
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/gpio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gpio
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/gpr_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gpr_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/i2c_master.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module i2c_master
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/idu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module idu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/idu_exu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module idu_exu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/ifu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ifu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/ifu_idu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ifu_idu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_dm.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module jtag_dm
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_driver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module jtag_driver
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module jtag_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/pipe_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipe_ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module prim_fifo_async
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module prim_flop_v
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module prim_flop_2sync_v
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ram
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/reset_generator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module reset_generator
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/rgmii_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rgmii_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/sys_bus/rib.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rib
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/rib_wr.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rib_wr
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/rom.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rom
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/rst_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rst_ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/sipo_converter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sipo_converter
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/timer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module timer
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/tinyriscv_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tinyriscv_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/top/tinyriscv_soc_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tinyriscv_soc_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/top_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/uart.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module udp
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module udp_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module udp_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/vld_rdy.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module vld_rdy
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/new/tb_gpio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tinyriscv_soc_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:05 . Memory (MB): peak = 1694.969 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '5' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tinyriscv_soc_tb_behav xil_defaultlib.tinyriscv_soc_tb xil_defaultlib.glbl -log elaborate.log"
+ECHO 处于关闭状态。
+ECHO 处于关闭状态。
+Vivado Simulator v2023.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: E:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tinyriscv_soc_tb_behav xil_defaultlib.tinyriscv_soc_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-5021] port 'rec_data_fifo' is not connected on this instance [E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/ADC_UDP_Top.v:214]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.gen_rst_0_dff(DW=1)
+Compiling module xil_defaultlib.gen_ticks_sync(DW=1)
+Compiling module xil_defaultlib.rst_ctrl
+Compiling module xil_defaultlib.gen_en_dff
+Compiling module xil_defaultlib.ifu
+Compiling module xil_defaultlib.pipe_ctrl
+Compiling module xil_defaultlib.gen_en_dffnr
+Compiling module xil_defaultlib.gpr_reg_default
+Compiling module xil_defaultlib.csr_reg
+Compiling module xil_defaultlib.ifu_idu
+Compiling module xil_defaultlib.idu
+Compiling module xil_defaultlib.gen_en_dff(DW=19)
+Compiling module xil_defaultlib.gen_en_dff(DW=5)
+Compiling module xil_defaultlib.gen_en_dff(DW=1)
+Compiling module xil_defaultlib.idu_exu
+Compiling module xil_defaultlib.exu_dispatch
+Compiling module xil_defaultlib.exu_alu_datapath
+Compiling module xil_defaultlib.exu_mem
+Compiling module xil_defaultlib.divider
+Compiling module xil_defaultlib.exu_muldiv
+Compiling module xil_defaultlib.exu_commit
+Compiling module xil_defaultlib.exu
+Compiling module xil_defaultlib.clint
+Compiling module xil_defaultlib.tinyriscv_core
+Compiling module xil_defaultlib.gen_ram(DP=8192)
+Compiling module xil_defaultlib.vld_rdy_default
+Compiling module xil_defaultlib.rom(DP=8192)
+Compiling module xil_defaultlib.gen_ram(DP=4096)
+Compiling module xil_defaultlib.ram
+Compiling module xil_defaultlib.timer
+Compiling module xil_defaultlib.uart
+Compiling module xil_defaultlib.gpio
+Compiling module xil_defaultlib.i2c_master
+Compiling module xil_defaultlib.i2c_controller
+Compiling module xil_defaultlib.SPI_Master(CLKS_PER_HALF_BIT=4)
+Compiling module xil_defaultlib.spi_wrapper
+Compiling module xil_defaultlib.sipo_converter(DATA_WIDTH=24)
+Compiling module xil_defaultlib.top_ctrl
+Compiling module xil_defaultlib.reset_generator
+Compiling module xil_defaultlib.prim_flop_v(Width=7)
+Compiling module xil_defaultlib.prim_flop_2sync_v(Width=7)
+Compiling module xil_defaultlib.prim_fifo_async(Depth=64)
+Compiling module xil_defaultlib.adc_core(ADC_WIDTH=12,ADC_CHANEL...
+Compiling module xil_defaultlib.rib_wr(ADC_CHANEL=2)
+Compiling module xil_defaultlib.rgmii_tx
+Compiling module xil_defaultlib.udp_tx(ADC_CHANEL=2)
+Compiling module xil_defaultlib.crc32_d8
+Compiling module xil_defaultlib.udp(ADC_CHANEL=2)
+Compiling module xil_defaultlib.udp_core(ADC_WIDTH=12,ADC_CHANEL...
+Compiling module xil_defaultlib.Baseline_Volt_Cal(ADC_WIDTH=12,A...
+Compiling module xil_defaultlib.ADC_UDP_top(ADC_CHANEL=2)
+Compiling module xil_defaultlib.full_handshake_tx(DW=40)
+Compiling module xil_defaultlib.full_handshake_rx(DW=40)
+Compiling module xil_defaultlib.jtag_driver_default
+Compiling module xil_defaultlib.jtag_dm_default
+Compiling module xil_defaultlib.jtag_top_default
+Compiling module xil_defaultlib.rib(SLAVE_NUM=8)
+Compiling module xil_defaultlib.tinyriscv_soc_top
+Compiling module xil_defaultlib.tinyriscv_soc_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tinyriscv_soc_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '5' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tinyriscv_soc_tb_behav -key {Behavioral:sim_1:Functional:tinyriscv_soc_tb} -tclbatch {tinyriscv_soc_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tinyriscv_soc_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+TEST_ADC enabled...
+TinyRISC-V SoC Testbench Starting...
+Instruction memory loaded successfully
+Reset released, simulation running...
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tinyriscv_soc_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:13 . Memory (MB): peak = 1714.805 ; gain = 19.836
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_sec_cm.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_standard_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_flop_macros.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_util_memload.svh] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 {E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_sec_cm.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_standard_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_flop_macros.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_util_memload.svh}
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/defines.v] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/defines.v
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/core/defines.v] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/core/defines.v
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'tinyriscv_soc_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'E:/Xilinx/Vivado/2023.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tinyriscv_soc_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj tinyriscv_soc_tb_vlog.prj"
+ECHO 处于关闭状态。
+ECHO 处于关闭状态。
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/ADC_UDP_Top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ADC_UDP_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/Baseline_Volt_Cal.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Baseline_Volt_Cal
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/I2C_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module i2c_controller
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/SPI_master.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SPI_Master
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/SPI_warpper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module spi_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/adc_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module adc_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/clint.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clint
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/crc32_d8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module crc32_d8
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/csr_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module csr_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/divider.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module divider
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_alu_datapath.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_alu_datapath
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_commit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_commit
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_dispatch.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_dispatch
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_muldiv.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exu_muldiv
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/full_handshake_rx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module full_handshake_rx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/full_handshake_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module full_handshake_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_buf.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gen_ticks_sync
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_dff.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gen_pipe_dff
+INFO: [VRFC 10-311] analyzing module gen_rst_0_dff
+INFO: [VRFC 10-311] analyzing module gen_rst_1_dff
+INFO: [VRFC 10-311] analyzing module gen_rst_def_dff
+INFO: [VRFC 10-311] analyzing module gen_en_dff
+INFO: [VRFC 10-311] analyzing module gen_en_dffnr
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gen_ram
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/gpio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gpio
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/gpr_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gpr_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/i2c_master.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module i2c_master
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/idu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module idu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/idu_exu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module idu_exu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/ifu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ifu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/ifu_idu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ifu_idu
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_dm.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module jtag_dm
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_driver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module jtag_driver
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module jtag_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/pipe_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipe_ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module prim_fifo_async
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module prim_flop_v
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module prim_flop_2sync_v
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ram
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/reset_generator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module reset_generator
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/rgmii_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rgmii_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/sys_bus/rib.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rib
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/rib_wr.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rib_wr
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/rom.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rom
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/rst_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rst_ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/sipo_converter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sipo_converter
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/timer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module timer
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/tinyriscv_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tinyriscv_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/top/tinyriscv_soc_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tinyriscv_soc_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/top_ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/uart.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module udp
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module udp_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module udp_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/utils/vld_rdy.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module vld_rdy
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/new/tb_gpio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tinyriscv_soc_tb
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:05 . Memory (MB): peak = 1720.207 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '5' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tinyriscv_soc_tb_behav xil_defaultlib.tinyriscv_soc_tb xil_defaultlib.glbl -log elaborate.log"
+ECHO 处于关闭状态。
+ECHO 处于关闭状态。
+Vivado Simulator v2023.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: E:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tinyriscv_soc_tb_behav xil_defaultlib.tinyriscv_soc_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-5021] port 'rec_data_fifo' is not connected on this instance [E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/ADC_UDP_Top.v:214]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.gen_rst_0_dff(DW=1)
+Compiling module xil_defaultlib.gen_ticks_sync(DW=1)
+Compiling module xil_defaultlib.rst_ctrl
+Compiling module xil_defaultlib.gen_en_dff
+Compiling module xil_defaultlib.ifu
+Compiling module xil_defaultlib.pipe_ctrl
+Compiling module xil_defaultlib.gen_en_dffnr
+Compiling module xil_defaultlib.gpr_reg_default
+Compiling module xil_defaultlib.csr_reg
+Compiling module xil_defaultlib.ifu_idu
+Compiling module xil_defaultlib.idu
+Compiling module xil_defaultlib.gen_en_dff(DW=19)
+Compiling module xil_defaultlib.gen_en_dff(DW=5)
+Compiling module xil_defaultlib.gen_en_dff(DW=1)
+Compiling module xil_defaultlib.idu_exu
+Compiling module xil_defaultlib.exu_dispatch
+Compiling module xil_defaultlib.exu_alu_datapath
+Compiling module xil_defaultlib.exu_mem
+Compiling module xil_defaultlib.divider
+Compiling module xil_defaultlib.exu_muldiv
+Compiling module xil_defaultlib.exu_commit
+Compiling module xil_defaultlib.exu
+Compiling module xil_defaultlib.clint
+Compiling module xil_defaultlib.tinyriscv_core
+Compiling module xil_defaultlib.gen_ram(DP=8192)
+Compiling module xil_defaultlib.vld_rdy_default
+Compiling module xil_defaultlib.rom(DP=8192)
+Compiling module xil_defaultlib.gen_ram(DP=4096)
+Compiling module xil_defaultlib.ram
+Compiling module xil_defaultlib.timer
+Compiling module xil_defaultlib.uart
+Compiling module xil_defaultlib.gpio
+Compiling module xil_defaultlib.i2c_master
+Compiling module xil_defaultlib.i2c_controller
+Compiling module xil_defaultlib.SPI_Master(CLKS_PER_HALF_BIT=4)
+Compiling module xil_defaultlib.spi_wrapper
+Compiling module xil_defaultlib.sipo_converter(DATA_WIDTH=24)
+Compiling module xil_defaultlib.top_ctrl
+Compiling module xil_defaultlib.reset_generator
+Compiling module xil_defaultlib.prim_flop_v(Width=7)
+Compiling module xil_defaultlib.prim_flop_2sync_v(Width=7)
+Compiling module xil_defaultlib.prim_fifo_async(Depth=64)
+Compiling module xil_defaultlib.adc_core(ADC_WIDTH=12,ADC_CHANEL...
+Compiling module xil_defaultlib.rib_wr(ADC_CHANEL=2)
+Compiling module xil_defaultlib.rgmii_tx
+Compiling module xil_defaultlib.udp_tx(ADC_CHANEL=2)
+Compiling module xil_defaultlib.crc32_d8
+Compiling module xil_defaultlib.udp(ADC_CHANEL=2)
+Compiling module xil_defaultlib.udp_core(ADC_WIDTH=12,ADC_CHANEL...
+Compiling module xil_defaultlib.Baseline_Volt_Cal(ADC_WIDTH=12,A...
+Compiling module xil_defaultlib.ADC_UDP_top(ADC_CHANEL=2)
+Compiling module xil_defaultlib.full_handshake_tx(DW=40)
+Compiling module xil_defaultlib.full_handshake_rx(DW=40)
+Compiling module xil_defaultlib.jtag_driver_default
+Compiling module xil_defaultlib.jtag_dm_default
+Compiling module xil_defaultlib.jtag_top_default
+Compiling module xil_defaultlib.rib(SLAVE_NUM=8)
+Compiling module xil_defaultlib.tinyriscv_soc_top
+Compiling module xil_defaultlib.tinyriscv_soc_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tinyriscv_soc_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '5' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tinyriscv_soc_tb_behav -key {Behavioral:sim_1:Functional:tinyriscv_soc_tb} -tclbatch {tinyriscv_soc_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tinyriscv_soc_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+TEST_ADC enabled...
+TinyRISC-V SoC Testbench Starting...
+Instruction memory loaded successfully
+Reset released, simulation running...
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tinyriscv_soc_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:12 . Memory (MB): peak = 1720.207 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+close_project
+open_project E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xilinx/Vivado/2023.2/data/ip'.
+update_compile_order -fileset sources_1
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/utils_1/imports/synth_1/tinyriscv_soc_top.dcp with file E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.runs/synth_1/tinyriscv_soc_top.dcp
+launch_runs synth_1 -jobs 16
+[Wed Sep 10 13:11:31 2025] Launched synth_1...
+Run output will be captured here: E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.runs/synth_1/runme.log
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/utils_1/imports/synth_1/tinyriscv_soc_top.dcp with file E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.runs/synth_1/tinyriscv_soc_top.dcp
+launch_runs synth_1 -jobs 16
+[Wed Sep 10 13:15:04 2025] Launched synth_1...
+Run output will be captured here: E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.runs/synth_1/runme.log
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/utils_1/imports/synth_1/tinyriscv_soc_top.dcp with file E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.runs/synth_1/tinyriscv_soc_top.dcp
+launch_runs synth_1 -jobs 16
+[Wed Sep 10 13:18:47 2025] Launched synth_1...
+Run output will be captured here: E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.runs/synth_1/runme.log
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Sep 10 13:21:41 2025...

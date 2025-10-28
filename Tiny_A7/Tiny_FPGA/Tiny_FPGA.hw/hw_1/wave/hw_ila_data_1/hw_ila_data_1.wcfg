@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/Tiny_A7/Tiny_FPGA/Tiny_FPGA.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wdb" id="1">
+         <top_modules>
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="103"></ZoomStartTime>
+      <ZoomEndTime time="1,006"></ZoomEndTime>
+      <Cursor1Time time="780"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="267"></NameColumnWidth>
+      <ValueColumnWidth column_width="62"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="15" />
+   <wave_markers>
+   </wave_markers>
+   <wvobject fp_name="tinyriscv_soc_top_0/spi_0/dbg_spi_csn" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/spi_0/dbg_spi_csn[1:0]</obj_property>
+      <obj_property name="ObjectShortName">dbg_spi_csn[1:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/spi_0/dbg_spi_miso" type="logic">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/spi_0/dbg_spi_miso</obj_property>
+      <obj_property name="ObjectShortName">dbg_spi_miso</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/spi_0/dbg_spi_mosi" type="logic">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/spi_0/dbg_spi_mosi</obj_property>
+      <obj_property name="ObjectShortName">dbg_spi_mosi</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/spi_0/dbg_spi_sck" type="logic">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/spi_0/dbg_spi_sck</obj_property>
+      <obj_property name="ObjectShortName">dbg_spi_sck</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/baseline_rib_data" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/baseline_rib_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">baseline_rib_data[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/cal_adc_value" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/cal_adc_value[31:0]</obj_property>
+      <obj_property name="ObjectShortName">cal_adc_value[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/data_ready_out_1" type="logic">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/data_ready_out_1</obj_property>
+      <obj_property name="ObjectShortName">data_ready_out_1</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/cfg_udp_tx_enable" type="logic">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/cfg_udp_tx_enable</obj_property>
+      <obj_property name="ObjectShortName">cfg_udp_tx_enable</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/ctrl_udp_tx_enable" type="logic">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/ctrl_udp_tx_enable</obj_property>
+      <obj_property name="ObjectShortName">ctrl_udp_tx_enable</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/fee_mode" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/fee_mode[4:0]</obj_property>
+      <obj_property name="ObjectShortName">fee_mode[4:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/adc_data_dly" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/adc_data_dly[23:0]</obj_property>
+      <obj_property name="ObjectShortName">adc_data_dly[23:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/u_adc_core/read_depth" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/u_adc_core/read_depth[6:0]</obj_property>
+      <obj_property name="ObjectShortName">read_depth[6:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/u_adc_core/write_depth" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/u_adc_core/write_depth[6:0]</obj_property>
+      <obj_property name="ObjectShortName">write_depth[6:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/fifo_data_out" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/fifo_data_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo_data_out[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+   <wvobject fp_name="tinyriscv_soc_top_0/u_ADC_UDP_top_inst/cal_adc_value" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tinyriscv_soc_top_0/u_ADC_UDP_top_inst/cal_adc_value[31:0]</obj_property>
+      <obj_property name="ObjectShortName">cal_adc_value[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+   </wvobject>
+</wave_config>

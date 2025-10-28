@@ -1,0 +1,70 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Sep 10 13:07:00 2025
+# Process ID: 12376
+# Current directory: E:/FPGA/project/Tiny_FPGA
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8600 E:\FPGA\project\Tiny_FPGA\Tiny_FPGA.xpr
+# Log file: E:/FPGA/project/Tiny_FPGA/vivado.log
+# Journal file: E:/FPGA/project/Tiny_FPGA\vivado.jou
+# Running On: xixixi, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 10, Host memory: 34010 MB
+#-----------------------------------------------------------
+start_guiopen_project E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.xpr
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ADC_UDP_Top.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/Baseline_Volt_Cal.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/adc_core.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/crc32_d8.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/gmii_to_rgmii.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop_2sync.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/reset_generator.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rgmii_tx.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rib_wr.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/serial_to_parallel.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/SIPO_module/SIPO_module.srcs/sources_1/new/sipo_converter.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/top_ctrl.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_core.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_tx.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_dummy_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_sec_cm.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_standard_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_yosys_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_macros.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_fifo_async.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.sv] -no_script -reset -force -quiet
+remove_files  {E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ADC_UDP_Top.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/Baseline_Volt_Cal.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/adc_core.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/crc32_d8.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/gmii_to_rgmii.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_flop_2sync.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/reset_generator.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rgmii_tx.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/rib_wr.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/serial_to_parallel.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/SIPO_module/SIPO_module.srcs/sources_1/new/sipo_converter.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/top_ctrl.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_core.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/udp_tx.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_dummy_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_sec_cm.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_standard_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_assert_yosys_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_macros.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/FIFO/prim_fifo_async.v E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.sv}
+launch_simulation
+source tinyriscv_soc_tb.tcl
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_sec_cm.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_standard_macros.svh] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_flop_macros.sv] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_util_memload.svh] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 {E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_sec_cm.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_assert_standard_macros.svh E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_flop_macros.sv E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/perips/prim_util_memload.svh}
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/defines.v] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sources_1/imports/rtl/core/defines.v
+export_ip_user_files -of_objects  [get_files E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/core/defines.v] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.srcs/sim_1/imports/rtl/core/defines.v
+close_sim
+launch_simulation
+source tinyriscv_soc_tb.tcl
+close_sim
+close_project
+open_project E:/FPGA/project/Tiny_FPGA/Tiny_FPGA.xpr
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1

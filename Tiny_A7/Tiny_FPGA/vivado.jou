@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Thu Oct 23 18:53:57 2025
+# Process ID: 3092
+# Current directory: C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/Tiny_A7/Tiny_FPGA
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent12056 C:\Users\ShoudongLUO\Desktop\RISCV\TinyRiscV_My\Tiny_A7\Tiny_FPGA\Tiny_FPGA.xpr
+# Log file: C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/Tiny_A7/Tiny_FPGA/vivado.log
+# Journal file: C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/Tiny_A7/Tiny_FPGA\vivado.jou
+# Running On: DESKTOP-98PI6EB, OS: Windows, CPU Frequency: 2112 MHz, CPU Physical cores: 16, Host memory: 34013 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/Tiny_A7/Tiny_FPGA/Tiny_FPGA.xpr

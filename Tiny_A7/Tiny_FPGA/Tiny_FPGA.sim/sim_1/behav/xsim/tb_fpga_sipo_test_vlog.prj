@@ -1,0 +1,62 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/ADC_UDP_Top.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/Baseline_Volt_Cal.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/new/FPGA_TEST.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/I2C_ctrl.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/SPI_master.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/SPI_warpper.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/adc_core.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/cdc_sync_level.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/clint.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/crc32_d8.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/csr_reg.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/divider.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_alu_datapath.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_commit.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_dispatch.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_mem.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/exu_muldiv.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/full_handshake_rx.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/full_handshake_tx.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_buf.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_dff.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/gen_ram.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/gpio.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/gpr_reg.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/i2c_master.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/idu.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/idu_exu.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/ifu.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/ifu_idu.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_dm.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_driver.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/debug/jtag_top.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/pipe_ctrl.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_fifo_async.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/FIFO/prim_flop_2sync.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ram.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/rgmii_tx.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/sys_bus/rib.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/rib_wr.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/rom.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/rst_ctrl.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/sipo_converter.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/timer.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/core/tinyriscv_core.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/top/tinyriscv_soc_top.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/top_ctrl.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/uart.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp_core.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/perips/ADC_UDP_TOP/udp_tx.v" \
+"../../../../Tiny_FPGA.srcs/sources_1/imports/rtl/utils/vld_rdy.v" \
+"../../../../Tiny_FPGA.srcs/sim_1/new/test_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
