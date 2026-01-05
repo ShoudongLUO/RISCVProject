@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ADC_UDP_top #(
+module DAQ_UDP_top #(
     parameter ADC_WIDTH = 12,
     parameter DATAWIDTH = 16,
     parameter ADC_CHANEL = 20
@@ -138,13 +138,17 @@ module ADC_UDP_top #(
     localparam MODE_ACQUISITION = 5'd2;
 
 // Status Definitions
-    localparam STAT_WAIT = 5'd0;
-    localparam STAT_INIT_FINISH = 5'd1;
-    localparam STAT_MEASURE_START = 5'd2;
-    localparam STAT_MEASURE_FINISH = 5'd3;
-    localparam STAT_CLUSTER_FINGDING=5'd4;
-    localparam STAT_CLUSTER_FINGDED = 5'd5;
-    localparam STAT_DATA_ACQUIISITION = 5'd6;
+    localparam STAT_WAIT = 4'd0;
+    localparam STAT_INIT_FINISH = 4'd1;
+    localparam STAT_MEASURE_START = 4'd2;
+    localparam STAT_MEASURE_FINISH = 4'd3;
+    localparam STAT_CLUSTER_FINGDING=4'd4;
+    localparam STAT_CLUSTER_FINGDED = 4'd5;
+    localparam STAT_DATA_ACQUIISITION = 4'd6;
+    localparam STAT_UDP_REQ_WAIT = 4'd7;
+    localparam STAT_UDP_REQ = 4'd8;
+
+
 
 
 
@@ -266,21 +270,6 @@ localparam REG_ADC_BASELINE  = 16'h2000; // W/R: Calculated baseline voltage
 localparam REG_ADC_NOISE     = 16'h3000; // W/R: Noise value
 
 
-// Mode Definitions
-    localparam MODE_IDLE        = 5'd0;
-    localparam MODE_CALIBRATION = 5'd1;
-    localparam MODE_ACQUISITION = 5'd2;
-
-// Status Definitions
-    localparam STAT_WAIT = 4'd0;
-    localparam STAT_INIT_FINISH = 4'd1;
-    localparam STAT_MEASURE_START = 4'd2;
-    localparam STAT_MEASURE_FINISH = 4'd3;
-    localparam STAT_CLUSTER_FINGDING=4'd4;
-    localparam STAT_CLUSTER_FINGDED = 4'd5;
-    localparam STAT_DATA_ACQUIISITION = 4'd6;
-    localparam STAT_UDP_REQ_WAIT = 4'd7;
-    localparam STAT_UDP_REQ = 4'd8;
 
 
     wire [DATAWIDTH-1:0] adc_channel [0:ADC_CHANEL-1];

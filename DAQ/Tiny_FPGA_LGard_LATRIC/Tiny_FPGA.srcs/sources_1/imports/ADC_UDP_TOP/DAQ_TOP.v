@@ -3,7 +3,10 @@
 module DAQ_UDP_top #(
     parameter ADC_WIDTH = 12,
     parameter DATAWIDTH = 16,
-    parameter ADC_CHANEL = 20
+    parameter ADC_CHANEL = 20,
+parameter IsSplitData = 1'b1,
+parameter REAL_DATA_WIDTH = 128,
+parameter REAL_DATA_CHANEL=2
 )(
     // System clocks and reset
     input clk,           // System clock (50MHz)
@@ -22,7 +25,7 @@ module DAQ_UDP_top #(
     output wire rsp_valid_o,
     input wire rsp_ready_i,
     // ADC Input
-    input [ADC_CHANEL*ADC_WIDTH-1:0] rec_ADC_data,
+    input [REAL_DATA_CHANEL*REAL_DATA_WIDTH-1:0] rec_ADC_data,
     (* MARK_DEBUG="true" *)input wire adc_data_ready,
     // Ethernet PHY Interface (RGMII)
     output eth_txc,      // RGMII TX Clock
@@ -51,7 +54,7 @@ module DAQ_UDP_top #(
     (* MARK_DEBUG="true" *)reg [ADC_CHANEL*DATAWIDTH-1:0] cal_adc_value;
     reg [ADC_CHANEL*DATAWIDTH-1:0] adc_test;
     reg data_accepted_rib;
-    (* MARK_DEBUG="true" *)wire [ADC_CHANEL*ADC_WIDTH-1:0] adc_data_dly;
+    (* MARK_DEBUG="true" *)wire [REAL_DATA_CHANEL*REAL_DATA_WIDTH-1:0] adc_data_dly;
     reg [3:0]  cfg_adc_width;
     reg [5:0]  cfg_datawidth;
     reg [21:0] cfg_num_channels;
@@ -231,6 +234,8 @@ localparam REG_ADC_NOISE     = 16'h3000; // W/R: Noise value
     endgenerate
 wire [8:0] Nwrite_adc;
 wire [15:0] adc_test_index;
+reg  [10:0] write_buffer_index;
+reg  [10:0] read_buffer_index;
 assign Nwrite_adc = s7_addr_o[11:0] >> 3;
 assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
 
@@ -253,6 +258,8 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
             cfg_adc_width     <= 0;
             cfg_datawidth     <= 0;
             cfg_num_channels  <= 0;
+            write_buffer_index      <=0;
+            read_buffer_index      <=0;
             cfg_fee_mode      <=5'd1;
         end
         else begin
@@ -277,20 +284,31 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
 
                     default: begin
                         // ADC Data Region (0x1000-0x1FFF)
+                        if(DATAWIDTH<7'h33)begin
+                  
                         if (s7_addr_o[15:12] == REG_ADC_DATA[15:12]) begin
                             cal_adc_value[(Nwrite_adc*DATAWIDTH) +: DATAWIDTH] <= s7_data_o[DATAWIDTH-1:0];
 
                         end
-                        // Baseline Region (0x2000-0x2FFF)
-                        else if (s7_addr_o[15:12] == REG_ADC_BASELINE[15:12]) begin
-                            baseline_rib_data[(Nwrite_adc*DATAWIDTH) +: DATAWIDTH] <= s7_data_o[DATAWIDTH-1:0];
-                        end
-                        // Noise Region (0x3000-0x3FFF)
-                        else if (s7_addr_o[15:12] == REG_ADC_NOISE[15:12]) begin
-                            adc_noise[(Nwrite_adc*DATAWIDTH) +: DATAWIDTH] <= s7_data_o[DATAWIDTH-1:0];
-                        end
                         else if (s7_addr_o[15:0] >= ADC_TEST && s7_addr_o[15:0] < ADC_TEST + ADC_CHANEL) begin
                             adc_test[adc_test_index *DATAWIDTH +: DATAWIDTH] <= s7_data_o[DATAWIDTH-1:0];
+                        end
+                        end
+                        else begin
+                            if(DATAWIDTH>(6'h32<<write_buffer_index))begin
+                                if (s7_addr_o[15:12] == REG_ADC_DATA[15:12]) begin
+                                    cal_adc_value[(Nwrite_adc*32*write_buffer_index) +: 32] <= s7_data_o[31:0];
+
+                                end
+                                else if (s7_addr_o[15:0] >= ADC_TEST && s7_addr_o[15:0] < ADC_TEST + ADC_CHANEL) begin
+                                    adc_test[adc_test_index *32*write_buffer_index +: 32] <= s7_data_o[31:0];
+                                end
+                                    write_buffer_index<=write_buffer_index+1'b1;
+                            end
+                            else begin
+                                write_buffer_index<=11'h0;
+                            end
+
                         end
                     end
                 endcase
@@ -298,23 +316,23 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
         end
 
     end
+wire [31:0] word_in_channel_index; // 当前地址对应的是该通道内的第几个32位字
+    wire [15:0] selected_channel_id;   // 当前地址选中的是第几个通道
+    reg [DATAWIDTH-1:0] current_channel_data; // 选中的那个通道的完整数据
 
+    assign selected_channel_id = s7_addr_o[11:0]>>3;
+    always @(*) begin
+        if (selected_channel_id < ADC_CHANEL) begin
+            current_channel_data = adc_channel[selected_channel_id];
+        end else begin
+            current_channel_data = {DATAWIDTH{1'b0}}; // 防止越界读取
+        end
+    end
     // Register Read Logic
     always @(*) begin
         data_accepted_rib <=1'b0;
         case (s7_addr_o[15:0])
-            ADC_TEST: begin
-            if (ADC_CHANEL == 1) begin
-                s7_data_i = {16'b0, adc_test[DATAWIDTH-1:0]}; // Direct read for single channel
-            end
-            // Multi-channel requires address offset
-            else if (s7_addr_o[15:0] >= ADC_TEST && s7_addr_o[15:0] < ADC_TEST + ADC_CHANEL) begin
-                s7_data_i = {16'b0, adc_test[(s7_addr_o[3:0]*DATAWIDTH) +: DATAWIDTH]};
-            end
-            else begin
-                s7_data_i = 32'h0; // Default value
-            end
-        end
+            
             REG_UDP_CONFIG:s7_data_i = {14'h0, cfg_fifo_wr_en, cfg_udp_tx_enable, cfg_tx_data_num};
             REG_BOARD_IP: s7_data_i = cfg_board_ip;
             REG_DES_IP:   s7_data_i = cfg_des_ip;
@@ -337,21 +355,37 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
 
 
             default: begin
+                   if(DATAWIDTH<7'h33)begin
                 // ADC Data Region (0x1000-0x1FFF)
                 if (s7_addr_o[15:12] == REG_ADC_DATA[15:12]) begin
-                    s7_data_i = {16'b0, adc_channel[(s7_addr_o[11:0]>>3)]};
+                    s7_data_i = {16'b0, adc_channel[selected_channel_id]};
                     data_accepted_rib <=1'b1;
                 end
                 // Baseline Region (0x2000-0x2FFF)
                else if (s7_addr_o[15:12] == REG_ADC_BASELINE[15:12]) begin
-                    s7_data_i = {16'b0, baseline_channel[(s7_addr_o[11:0]>>3)]};
+                    s7_data_i = {16'b0, baseline_channel[selected_channel_id]};
                 end
                 // Noise Region (0x3000-0x3FFF)
                else if (s7_addr_o[15:12] == REG_ADC_NOISE[15:12]) begin
-                    s7_data_i = {16'b0, noise_channel[(s7_addr_o[11:0]>>3)]};
+                    s7_data_i = {16'b0, noise_channel[selected_channel_id]};
                 end
                 else begin
                     s7_data_i = 32'hDEADBEEF; // Debug value
+                end
+                end
+                else begin
+                    if(DATAWIDTH>(7'h32<<read_buffer_index))begin
+                                if (s7_addr_o[15:12] == REG_ADC_DATA[15:12]) begin
+                                  s7_data_i = current_channel_data[32*read_buffer_index +:32];
+                                    data_accepted_rib <=1'b1;
+                                end
+                                else s7_data_i = 32'hDEADBEEF; // Debug value
+                    end
+                    else begin
+                                read_buffer_index<=11'h0;
+                                s7_data_i = 32'hDEADBEEF; // Debug value
+                    end
+                
                 end
             end
         endcase
@@ -363,6 +397,9 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
     adc_core #(
         .ADC_WIDTH(ADC_WIDTH),
         .DATAWIDTH(DATAWIDTH),
+        .REAL_DATA_WIDTH(REAL_DATA_WIDTH),
+        .REAL_DATA_CHANEL(REAL_DATA_CHANEL),
+        .IsSplitData(IsSplitData),
         .ADC_CHANEL(ADC_CHANEL)
     ) u_adc_core (
         .adc_clk(clk),
