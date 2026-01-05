@@ -1,0 +1,25 @@
+$date
+        2025-Sep-11 15:38:15
+$end
+$version
+        Vivado v2023.2 (64-bit)
+$end
+$timescale
+        1ps
+$end
+$scope module dut $end
+$var reg 32 " tinyriscv_soc_top_0/u_ADC_UDP_top_inst/udp_tx_data [31:0] $end
+$var reg 1 B _TRIGGER $end
+$var reg 1 C _WINDOW $end
+$var reg 1 D _GAP $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 "
+0B
+1C
+0D
+$end
+#8192
+1B

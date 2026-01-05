@@ -100,18 +100,29 @@ end
 reg data_valid_sys_sync1, data_valid_sys_sync2;
 wire data_ready_udp;
 
-// 同步 sys_clk 域的 tx_data_fifo 到 udp_clk 域
-reg [ADC_CHANEL*DATAWIDTH-1:0] tx_data_fifo_sync1, tx_data_fifo_sync2;
+
+reg [ADC_CHANEL*DATAWIDTH-1:0] tx_data_fifo_sync1, tx_data_fifo_sync2, tx_data_fifo_sync3;
+reg data_valid_sys_sync1, data_valid_sys_sync2;
 
 always @(posedge udp_clk or negedge sys_rst_n) begin
     if(!sys_rst_n) begin
         tx_data_fifo_sync1 <= 0;
         tx_data_fifo_sync2 <= 0;
+        tx_data_fifo_sync3 <= 0;
+        data_valid_sys_sync1 <= 0;
+        data_valid_sys_sync2 <= 0;
     end else begin
-        tx_data_fifo_sync1 <= tx_data_fifo;  // 同步信号到 udp_clk 域
+        tx_data_fifo_sync1 <= tx_data_fifo;
         tx_data_fifo_sync2 <= tx_data_fifo_sync1;
+        tx_data_fifo_sync3 <= tx_data_fifo_sync2;  // 三级同步提高稳定性
+        
+        data_valid_sys_sync1 <= data_valid_sys;
+        data_valid_sys_sync2 <= data_valid_sys_sync1;
     end
 end
+
+// 只在数据稳定时使用
+wire [ADC_CHANEL*DATAWIDTH-1:0] stable_tx_data = data_valid_sys_sync2 ? tx_data_fifo_sync3 : 0;
 assign data_ready_udp = data_valid_sys_sync2;
 
 // 双 flop 同步 data_valid_sys
@@ -160,7 +171,7 @@ always @(posedge udp_clk or negedge sys_rst_n) begin
                 udp_tx_data <= package_cnt;
                 FirstByte <= 1'b0;
             end else begin
-                udp_tx_data <= tx_data_fifo_sync2;  // 使用同步后的 tx_data_fifo 数据
+                udp_tx_data <= stable_tx_data;  // 使用同步后的 tx_data_fifo 数据
             end
         end
         else if(!data_ready_udp)begin

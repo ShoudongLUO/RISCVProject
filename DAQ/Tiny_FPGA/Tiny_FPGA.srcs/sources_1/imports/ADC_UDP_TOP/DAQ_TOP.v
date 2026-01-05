@@ -71,53 +71,14 @@ module DAQ_UDP_top #(
    (* MARK_DEBUG="true" *) reg ctrl_udp_tx_enable;
     reg sys_message_sending;
     (* MARK_DEBUG="true" *)reg [4:0]cfg_fee_mode;
-    // Additional control signals
-    wire [3:0] req_channel;
 
-    // Data accept control logic
-    reg udp_tx_done_sync;
-    reg tx_done_pulse;
-    reg data_accept;
-    reg monitoring;
-    reg first_packet_sent;
-    reg cfg_udp_tx_enable_sync;
+
     reg end_udp_tran;
     // Assign eth_rst_n
     assign eth_rst_n = rst_n;
 
     assign adc_data_dly = adc_data_ready ? rec_ADC_data : 0;
-    // Data accept control logic
-    always @(posedge clk_udp or negedge rst_n) begin
-        if (!rst_n) begin
-            first_packet_sent <= 1'b0;
-            monitoring <= 1'b0;
-            data_accept <= 1'b0;
-            udp_tx_done_sync <= 1'b0;
-            tx_done_pulse <= 1'b0;
-            cfg_udp_tx_enable_sync <= 1'b0;
-        end else begin       
-            // Detect rising edge of udp_tx_done
-            udp_tx_done_sync <= udp_tx_done;
-            tx_done_pulse <= (udp_tx_done && !udp_tx_done_sync);
-            
-            if (tx_done_pulse) begin
-                monitoring <= 1'b1;
-            end
-            
-            // First transmission or sending status/calibration value
-            if ((ctrl_udp_tx_enable && !first_packet_sent)|| sys_status == 4'd3) begin
-                data_accept <= 1'b1;
-                first_packet_sent <= 1'b1;
-                monitoring <= 1'b0;
-            end
-            else if (monitoring ) begin
-                data_accept <= 1'b1;
-                monitoring <= 1'b0;
-            end else begin
-                data_accept <= 1'b0;
-            end
-        end
-    end
+    
 
 /******************************************/
 //System Control Logic
@@ -167,6 +128,7 @@ module DAQ_UDP_top #(
             current_state <= S_IDLE;
             next_state <=  S_IDLE;
             fee_mode <= MODE_IDLE;
+        end_udp_tran<=1'b0;
             ctrl_fifo_wr_en <= 1'b0;
             ctrl_udp_tx_enable <= 1'b0;
             sys_run <=1'b0;
@@ -233,23 +195,9 @@ module DAQ_UDP_top #(
 end
 
 
-    // ADC Core Instance
-    adc_core #(
-        .ADC_WIDTH(ADC_WIDTH),
-        .ADC_CHANEL(ADC_CHANEL)
-    ) u_adc_core (
-        .adc_clk(clk),
-        .sys_clk(clk),
-        .rst_n(rst_n),
-        .data_accepted_rib(data_accepted_rib),
-        .adc_data_in(adc_data_dly),
-        .fifo_wr_en(ctrl_fifo_wr_en),
-        .sys_status(sys_status),
-        .ADC_DATA(fifo_data_out),
-        .fifo_full(fifo_full),
-        .fifo_empty(fifo_empty),
-        .fee_mode(fee_mode)
-    );
+/*************/
+//Bus Interfece(RIB)
+/*************/
 
     // RIB Write Instance
     // Register Address Map
@@ -411,6 +359,24 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
     end
 
 
+    // ADC Core Instance
+    adc_core #(
+        .ADC_WIDTH(ADC_WIDTH),
+        .ADC_CHANEL(ADC_CHANEL)
+    ) u_adc_core (
+        .adc_clk(clk),
+        .sys_clk(clk),
+        .rst_n(rst_n),
+        .data_accepted_rib(data_accepted_rib),
+        .adc_data_in(adc_data_dly),
+        .fifo_wr_en(ctrl_fifo_wr_en),
+        .sys_status(sys_status),
+        .ADC_DATA(fifo_data_out),
+        .fifo_full(fifo_full),
+        .fifo_empty(fifo_empty),
+        .fee_mode(fee_mode)
+    );
+
     // UDP Core Instance
     // This module is defined in an external file
     udp_core #(
@@ -431,13 +397,13 @@ assign adc_test_index = s7_addr_o[15:0] - ADC_TEST;
         .eth_tx_ctl(eth_tx_ctl),
         .eth_txd(eth_txd),
         .udp_tx_done(udp_tx_done),
-        .DataAccept(data_accept),
+        .DataAccept(1'b1),
         .udp_busy(udp_busy)
     );
 
     // DataPack Instance
     // This module is defined in an external file
-    DataPack #(
+    DataPack_AFIFO #(
         .ADC_WIDTH(ADC_WIDTH),
         .ADC_CHANEL(ADC_CHANEL)
     ) u_data_pack(

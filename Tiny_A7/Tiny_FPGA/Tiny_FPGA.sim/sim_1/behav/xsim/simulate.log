@@ -28695,4 +28695,3 @@ Final LED status: 0x3
 [1107330000] MON: data_ready_out pulse detected
 [1107330000] MON: LED status changed: 0x2 -> 0x3
 [1107370000] MON: LED status changed: 0x3 -> 0xf
-INFO: xsimkernel Simulation Memory Usage: 19964 KB (Peak: 19964 KB), Simulation CPU Usage: 23686 ms

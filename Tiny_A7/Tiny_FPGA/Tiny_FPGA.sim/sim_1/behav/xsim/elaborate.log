@@ -6,4 +6,70 @@ Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.gen_rst_0_dff(DW=1)
+Compiling module xil_defaultlib.gen_ticks_sync(DW=1)
+Compiling module xil_defaultlib.rst_ctrl
+Compiling module xil_defaultlib.gen_en_dff
+Compiling module xil_defaultlib.ifu
+Compiling module xil_defaultlib.pipe_ctrl
+Compiling module xil_defaultlib.gen_en_dffnr
+Compiling module xil_defaultlib.gpr_reg_default
+Compiling module xil_defaultlib.csr_reg
+Compiling module xil_defaultlib.ifu_idu
+Compiling module xil_defaultlib.idu
+Compiling module xil_defaultlib.gen_en_dff(DW=19)
+Compiling module xil_defaultlib.gen_en_dff(DW=5)
+Compiling module xil_defaultlib.gen_en_dff(DW=1)
+Compiling module xil_defaultlib.idu_exu
+Compiling module xil_defaultlib.exu_dispatch
+Compiling module xil_defaultlib.exu_alu_datapath
+Compiling module xil_defaultlib.exu_mem
+Compiling module xil_defaultlib.divider
+Compiling module xil_defaultlib.exu_muldiv
+Compiling module xil_defaultlib.exu_commit
+Compiling module xil_defaultlib.exu
+Compiling module xil_defaultlib.clint
+Compiling module xil_defaultlib.tinyriscv_core
+Compiling module xil_defaultlib.gen_ram(DP=8192)
+Compiling module xil_defaultlib.vld_rdy_default
+Compiling module xil_defaultlib.rom(DP=8192)
+Compiling module xil_defaultlib.gen_ram(DP=4096)
+Compiling module xil_defaultlib.ram
+Compiling module xil_defaultlib.timer
+Compiling module xil_defaultlib.uart
+Compiling module xil_defaultlib.gpio
+Compiling module xil_defaultlib.i2c_master
+Compiling module xil_defaultlib.i2c_controller
+Compiling module xil_defaultlib.SPI_Master(CLKS_PER_HALF_BIT=4)
+Compiling module xil_defaultlib.spi_wrapper
+Compiling module xil_defaultlib.sipo_converter
+Compiling module xil_defaultlib.top_ctrl
+Compiling module xil_defaultlib.cdc_sync_level
+Compiling module xil_defaultlib.prim_flop_v(Width=7)
+Compiling module xil_defaultlib.prim_flop_2sync_v(Width=7)
+Compiling module xil_defaultlib.prim_fifo_async(Depth=64)
+Compiling module xil_defaultlib.adc_core(ADC_WIDTH=12,ADC_CHANEL...
+Compiling module xil_defaultlib.rib_wr(ADC_CHANEL=2)
+Compiling module unisims_ver.ODDR(DDR_CLK_EDGE="SAME_EDGE",SR...
+Compiling module unisims_ver.ODDR2(DDR_ALIGNMENT="C0",SRTYPE=...
+Compiling module xil_defaultlib.rgmii_tx_default
+Compiling module xil_defaultlib.udp_tx(ADC_CHANEL=2)
+Compiling module xil_defaultlib.crc32_d8
+Compiling module xil_defaultlib.udp(ADC_CHANEL=2)
+Compiling module xil_defaultlib.udp_core(ADC_WIDTH=12,ADC_CHANEL...
+Compiling module xil_defaultlib.Baseline_Volt_Cal(ADC_WIDTH=12,A...
+Compiling module xil_defaultlib.ADC_UDP_top(ADC_CHANEL=2)
+Compiling module xil_defaultlib.full_handshake_tx(DW=40)
+Compiling module xil_defaultlib.full_handshake_rx(DW=40)
+Compiling module xil_defaultlib.jtag_driver_default
+Compiling module xil_defaultlib.jtag_dm_default
+Compiling module xil_defaultlib.jtag_top_default
+Compiling module xil_defaultlib.rib(SLAVE_NUM=8)
+Compiling module xil_defaultlib.tinyriscv_soc_top
+Compiling module xil_defaultlib.fpga_sipo_test
+Compiling module xil_defaultlib.tb_fpga_sipo_test
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_fpga_sipo_test_behav

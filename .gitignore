@@ -1,0 +1,24 @@
+# 1. 忽略 Vivado 自动生成的临时文件扩展名 (通用规则)
+*.log
+*.jou
+*.str
+*.txt
+*.os
+*.pb
+
+# 2. 忽略特定的 Vivado 目录
+**/Tiny_FPGA.cache/
+**/Tiny_FPGA.gen/
+**/Tiny_FPGA.hw/
+**/Tiny_FPGA.ip_user_files/
+**/Tiny_FPGA.runs/
+**/Tiny_FPGA.sim/
+
+# 3. 针对你的路径，忽略 Tiny_FPGA 目录下除了 srcs 以外的所有内容
+# 这里的写法是：先忽略里面所有文件
+**/Tiny_FPGA/*
+
+# 4. 排除（即保留）你想要的文件
+!**/Tiny_FPGA/Tiny_FPGA.srcs/
+!**/Tiny_FPGA/*.xpr
+!**/Tiny_FPGA/*.tcl
