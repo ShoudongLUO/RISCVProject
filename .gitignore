@@ -22,3 +22,5 @@
 !**/Tiny_FPGA/Tiny_FPGA.srcs/
 !**/Tiny_FPGA/*.xpr
 !**/Tiny_FPGA/*.tcl
+DAQ/.vscode/c_cpp_properties.json
+DAQ/.vscode/tasks.json
