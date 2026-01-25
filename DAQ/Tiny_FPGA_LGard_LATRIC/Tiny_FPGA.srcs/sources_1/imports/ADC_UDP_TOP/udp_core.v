@@ -1,5 +1,5 @@
 module udp_core  #(
-        parameter ADC_WIDTH = 8,
+
 parameter DATAWIDTH = 16,
 parameter ADC_CHANEL = 1
     )(
@@ -165,7 +165,8 @@ parameter ADC_CHANEL = 1
     );
 
     udp #(
-        .ADC_CHANEL(ADC_CHANEL)
+        .ADC_CHANEL(ADC_CHANEL),
+        .DATAWIDTH(DATAWIDTH)
     )u_udp 
     (
         .BOARD_MAC     (BOARD_MAC),

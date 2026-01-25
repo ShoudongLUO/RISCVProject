@@ -53,6 +53,7 @@ module tdc_finetime_decoder (
     // and compare it against the perfect pattern (15 zeros, 15 ones).
     
     logic [29:0] rotated_data;
+    logic [4:0]  shift_amt;
     // Perfect pattern for a standard thermometer code often looks like 00...0011...11
     // Based on C logic: after 0->1 transition, we expect 15 1s then 15 0s.
     // The "Start" is at ic+1.
@@ -65,18 +66,22 @@ module tdc_finetime_decoder (
         // We expect bits [14:0] to be 1, and [29:15] to be 0.
         // Note: raw_data is 30 bits. 
         // Logic: (raw >> shift) | (raw << (30-shift))
-        logic [5:0] shift_amt; // 30 + 1 needs 6 bits range
-        shift_amt = {1'b0, ic_found} + 1;
+        // We want to move this '0' to index 15 (just above the 15 ones).
+        // Shift = (29 - ic) - 15 = 14 - ic.
         
-        // Handle wrap around for shift amount 30
-        if (shift_amt >= 30) shift_amt = shift_amt - 30;
+        if (5'd14 >= ic_found) begin
+            shift_amt = 5'd14 - ic_found;
+        end else begin
+            shift_amt = 5'd14 - ic_found + 5'd30;
+        end
         
+        // Barrel Shifter (Rotate Right)
         rotated_data = (raw_data >> shift_amt) | (raw_data << (30 - shift_amt));
     end
     
     logic pattern_perfect;
     always_comb begin
-        // Check if lower 15 bits are 1 and upper 15 bits are 0
+        // Now compare with the perfect 15-bit block at the bottom
         if (rotated_data == 30'h00007FFF) begin
             pattern_perfect = 1'b1;
         end else begin

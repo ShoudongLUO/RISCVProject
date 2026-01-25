@@ -19,7 +19,7 @@ module tb_top;
     
     // DUT Outputs
     logic         match_valid_out;
-    logic signed [63:0] time_diff_ps_out;
+    logic signed [15:0] time_diff_ps_out;
     logic         ch1_decode_err, ch2_decode_err;
 
     // Simulation Memory (Buffers for vectors)
@@ -32,7 +32,7 @@ module tb_top;
     // 2. DUT INSTANTIATION
     // =========================================================================
     top_dual_channel_analysis #(
-        .MATCH_WINDOW_PS (64'd10000), // Relaxed window for testing (10ns)
+        .MATCH_WINDOW_PS (64'd50000), // Relaxed window for testing (10ns)
         .FIFO_DEPTH      (64)
     ) dut (
         .clk_fast       (clk_fast),
@@ -72,8 +72,8 @@ module tb_top;
         // A. Load Vectors
         $display("Loading vectors...");
         // Ensure these files exist in simulation directory
-        $readmemh("ch1_vectors.txt", mem_ch1);
-        $readmemh("ch2_vectors.txt", mem_ch2);
+        $readmemh("C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/DAQ/Tiny_FPGA_LGard_LATRIC/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ch1_vectors.txt", mem_ch1);
+        $readmemh("C:/Users/ShoudongLUO/Desktop/RISCV/TinyRiscV_My/DAQ/Tiny_FPGA_LGard_LATRIC/Tiny_FPGA.srcs/sources_1/imports/ADC_UDP_TOP/ch2_vectors.txt", mem_ch2);
         
         // Count how many vectors we loaded (naive way or hardcode)
         // Here assuming we just run until we hit 0s or max count

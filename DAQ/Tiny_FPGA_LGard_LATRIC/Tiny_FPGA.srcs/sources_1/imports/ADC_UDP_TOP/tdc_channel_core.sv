@@ -5,8 +5,9 @@ module tdc_channel_core (
     input  logic         data_valid,
     
     output logic         out_valid,
-    output logic [11:0]  total_ticks_out [2:0], // [0]=CAL, [1]=TOA, [2]=TOT
+    output logic [11:0]  total_ticks_out [2:0], // [0]=TOT, [1]=TOA, [2]=CAL
     output logic [31:0]  lsb_ps_out,            // Q16.16 Fixed Point
+    output logic [2:0]   data_flag[2:0],
     output logic [2:0]   err_flags              // [0]=CAL err, etc.
 );
     
@@ -21,11 +22,12 @@ module tdc_channel_core (
     logic [29:0] raw_fine [2:0];
     logic [6:0]  raw_coarse [2:0];
     logic [4:0]  dec_fine [2:0];
-    logic        dec_valid [2:0];
+    logic        dec_valid [2:0];       
     logic        s1_valid, s2_valid, s3_valid;
     logic [4:0]  s1_fine [2:0];
     logic [6:0]  s1_coarse [2:0];
     logic [2:0]  s1_err_flags, s2_err_flags, s3_err_flags;
+    logic [2:0]  data_flag1,data_flag2,data_flag3;
     logic [11:0] total_ticks [2:0];
     logic signed [12:0] dcode;
     logic [31:0] calc_lsb;
@@ -46,7 +48,7 @@ module tdc_channel_core (
                 .raw_data(raw_fine[i]), 
                 .fine_time(dec_fine[i]),
                 .valid(dec_valid[i]), 
-                .has_bubble(), .err_no_edge(), .err_bad_cnt()
+                .has_bubble(data_flag1[i]), .err_no_edge(data_flag2[i]), .err_bad_cnt(data_flag3[i])
             );
         end
     endgenerate
@@ -64,6 +66,9 @@ module tdc_channel_core (
                     s1_coarse[TIME_TYPE[k]] <= raw_coarse[k];
                     s1_err_flags[TIME_TYPE[k]] <= ~dec_valid[k]; 
                 end
+            end
+            for(int k=0; k<3; k++) begin
+                data_flag[k] <={data_flag3[k], data_flag2[k], data_flag1[k]};
             end
         end
     end

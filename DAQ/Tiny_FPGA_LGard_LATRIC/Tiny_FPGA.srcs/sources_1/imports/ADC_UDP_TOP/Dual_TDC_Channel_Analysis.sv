@@ -2,7 +2,8 @@
 
 module top_dual_channel_analysis #(
     parameter signed [63:0] MATCH_WINDOW_PS = 64'd3000,  // 3ns Window
-    parameter int           FIFO_DEPTH      = 64
+    parameter int           FIFO_DEPTH      = 64,
+    parameter int           DATA_WIDTH      = 16
 )(
     // ==========================================
     // CLOCKS & RESET
@@ -27,7 +28,8 @@ module top_dual_channel_analysis #(
     // ANALYSIS OUTPUT (Synced to clk_sys)
     // ==========================================
     output logic         match_valid_out,
-    output logic signed [63:0] time_diff_ps_out, // The final 'dtm' result
+    output logic signed [DATA_WIDTH-1:0] time_diff_ps_out, // The final 'dtm' result
+    output logic        [17:0] data_flag,
 
     // Optional: Debugging / Monitoring ports
     output logic         ch1_decode_error,
@@ -41,7 +43,8 @@ module top_dual_channel_analysis #(
     logic [11:0] c1_ticks [2:0]; // [0]=CAL, [1]=TOA, [2]=TOT
     logic [31:0] c1_lsb;
     logic [2:0]  c1_errs;
-    logic [63:0] c1_abs_time_ps;
+    logic [DATA_WIDTH-1:0] c1_abs_time_ps;
+    logic [2:0]   data_flag_1[2:0];
 
     tdc_channel_core u_core_ch1 (
         .clk             (clk_fast),
@@ -51,6 +54,7 @@ module top_dual_channel_analysis #(
         .out_valid       (c1_core_valid),
         .total_ticks_out (c1_ticks),
         .lsb_ps_out      (c1_lsb),
+        .data_flag       (data_flag_1),
         .err_flags       (c1_errs)
     );
 
@@ -58,10 +62,12 @@ module top_dual_channel_analysis #(
     // 2. CHANNEL 2 DECODING
     // =========================================================================
     logic        c2_core_valid;
+    logic [11:0] data_counter[1:0];
     logic [11:0] c2_ticks [2:0];
     logic [31:0] c2_lsb;
     logic [2:0]  c2_errs;
-    logic [63:0] c2_abs_time_ps;
+    logic [DATA_WIDTH-1:0] c2_abs_time_ps;
+    logic [2:0]   data_flag_2[2:0];
 
     tdc_channel_core u_core_ch2 (
         .clk             (clk_fast),
@@ -71,6 +77,7 @@ module top_dual_channel_analysis #(
         .out_valid       (c2_core_valid),
         .total_ticks_out (c2_ticks),
         .lsb_ps_out      (c2_lsb),
+        .data_flag       (data_flag_2),
         .err_flags       (c2_errs)
     );
 
@@ -88,16 +95,23 @@ module top_dual_channel_analysis #(
         if (!rst_n) begin
             c1_abs_time_ps <= '0;
             c2_abs_time_ps <= '0;
+            data_counter[0]<='0;
+            data_counter[1]<='0;
+            data_flag[0]   <='0;
+            data_flag[1]   <='0;
         end else begin
             // Convert Channel 1
             if (c1_core_valid) begin
                 c1_abs_time_ps <= (c1_ticks[IDX_TOA] * c1_lsb) >> 16;
+                data_counter[0]<=data_counter[0]+1'b1;
             end
-
+            data_flag[8:0]={data_flag_1[2],data_flag_1[1],data_flag_1[0]};
             // Convert Channel 2
             if (c2_core_valid) begin
                 c2_abs_time_ps <= (c2_ticks[IDX_TOA] * c2_lsb) >> 16;
+                data_counter[1]<=data_counter[1]+1'b1;
             end
+            data_flag[17:9]={data_flag_2[2],data_flag_2[1],data_flag_2[0]};
         end
     end
 
@@ -106,10 +120,11 @@ module top_dual_channel_analysis #(
     // =========================================================================
     coincidence_analyzer #(
         .FIFO_DEPTH      (FIFO_DEPTH),
+        .DATA_WIDTH      (DATA_WIDTH),
         .MATCH_WINDOW_PS (MATCH_WINDOW_PS)
     ) u_analyzer (
         // Write Domain (Fast)
-        .adc_clk         (clk_fast),
+        .tdc_clk         (clk_fast),
         .rst_n           (rst_n),
         
         .ch1_valid_in    (c1_core_valid), // Use validity flag to push to FIFO

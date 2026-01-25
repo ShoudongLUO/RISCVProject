@@ -3,184 +3,230 @@ import os
 import math
 
 # ================= 配置区域 =================
-# 输入文件路径 (请修改这里)
-INPUT_CSV = "Tek000_010_ALL_laser10.csv"
-
-# 输出文件名称
+# 必须使用 r"" 来防止路径转义错误
+INPUT_CSV = r"C:\Users\ShoudongLUO\Desktop\RISCV\500kHz-100%-300V_002_ALL.csv"
 OUT_FILE_CH1 = "ch1_vectors.txt"
 OUT_FILE_CH2 = "ch2_vectors.txt"
 
-# 物理参数 (必须与 C 代码一致)
-THRESHOLD = 0.13      # 阈值电压 (V)
-SAMDT = 0.16          # 采样间隔 (ns)
-SERFEQ = 720.0        # 通信频率 (MHz)
-BIT_DURATION = (1.0 / SERFEQ) * 1000.0 # 单比特时长 (ns)
 
-# 协议参数
+# ================= 物理常数 =================
+THRESHOLD = 0.13          
+SAMDT = 0.16              
+SERFEQ = 720.0            
+DBIT = (1.0 / SERFEQ) * 1000.0 
+
+# ================= 协议常数 =================
 HEADER_PATTERN = 0b10101010101010101
 HEADER_LEN = 17
 HEADER_MASK = (1 << HEADER_LEN) - 1
+WORD_CONFIG = [30, 30, 30, 7, 7, 7] 
 
-# 数据包结构: 30-30-30-7-7-7
-WORD_LENGTHS = [30, 30, 30, 7, 7, 7]
-TOTAL_WORDS = 6
+class ChannelEvent:
+    def __init__(self):
+        self.headerbuf = 0
+        self.header = 0
+        self.data = [0] * 6
+        self.id = [0, 0]
 
-class ChannelDecoder:
-    def __init__(self, ch_id, outfile):
-        self.ch_id = ch_id
-        self.f_out = open(outfile, 'w')
-        self.reset()
+    def clear(self, level=0):
+        if level >= 1: self.headerbuf = 0
+        self.header = 0
+        self.data = [0] * 6
+        self.id = [0, 0]
+
+    def translatecode(self, dt_ns):
+        return int(dt_ns / DBIT + 0.5)
+
+    def getfinecode(self, val):
+        ic = 0
+        found = False
+        for i in range(30):
+            ps = (val >> (29 - i)) & 1
+            if i == 29: ns = (val >> 29) & 1
+            else: ns = (val >> (29 - i - 1)) & 1
+            if ps == 0 and ns == 1:
+                ic = i
+                found = True
+                break
+        if not found: return -2 
         
-    def reset(self):
-        self.header_buf = 0
-        self.header_found = False
-        self.data = [0] * TOTAL_WORDS
-        self.current_word_idx = 0
-        self.current_bit_count = 0
-        
-    def close(self):
-        self.f_out.close()
-
-    def translate_code(self, dt_ns):
-        # 计算脉冲持续时间对应的比特数 (对应 C++ translatecode)
-        nb = int((dt_ns / BIT_DURATION) + 0.5)
-        return nb
-
-    def push_bits(self, bit_val, count):
-        # 模拟 C++ 的 loadbuf
-        # bit_val: 0 或 1
-        # count: 连续多少个这样的 bit
-        
-        for _ in range(count):
-            # 1. 如果还没找到 Header，先找 Header
-            if not self.header_found:
-                self.header_buf = ((self.header_buf << 1) | bit_val) & HEADER_MASK
-                if self.header_buf == HEADER_PATTERN:
-                    self.header_found = True
-                    self.header_buf = 0 # 重置 buffer
-                    # print(f"Ch{self.ch_id} Header Found!")
-            
-            # 2. 如果 Header 找到了，开始填充数据
+        onezero = [0, 0]
+        for j in range(ic + 1, ic + 1 + 30):
+            pb = 29 - j
+            if pb < 0: pb += 30 
+            ps = (val >> pb) & 1
+            if ps == 1: onezero[0] += 1
+            if j < ic + 1 + 15:
+                if ps == 1: onezero[1] += 1
             else:
-                # 将 bit 推入当前的数据字
-                curr_idx = self.current_word_idx
-                self.data[curr_idx] = (self.data[curr_idx] << 1) | bit_val
-                self.current_bit_count += 1
-                
-                # 检查当前字是否填满
-                target_len = WORD_LENGTHS[curr_idx]
-                
-                # 特殊逻辑：前3个字允许是30位，后3个是7位 (复刻 C++ idflag 逻辑)
-                if self.current_bit_count >= target_len:
-                    self.current_word_idx += 1
-                    self.current_bit_count = 0
-                    
-                    # 检查是否所有字都填满了 (包完整了)
-                    if self.current_word_idx >= TOTAL_WORDS:
-                        self.write_packet()
-                        self.reset_payload() # 准备下一个包 (注意：不重置 Header 查找状态? 
-                                             # C代码中 ev[i]->clear() 会重置 header，这意味着
-                                             # 每个包都需要重新找 header)
-                        self.header_found = False 
-                        self.header_buf = 0
-
-    def reset_payload(self):
-        self.data = [0] * TOTAL_WORDS
-        self.current_word_idx = 0
-        self.current_bit_count = 0
-
-    def write_packet(self):
-        # 将 data[0]..data[5] 拼成 128-bit 大整数
-        # 映射关系参考 Verilog:
-        # [127:98] = data[0] (30 bit)
-        # [97:68]  = data[1] (30 bit)
-        # [67:38]  = data[2] (30 bit)
-        # [37:31]  = data[3] (7 bit)
-        # [30:24]  = data[4] (7 bit)
-        # [23:17]  = data[5] (7 bit)
+                if ps == 0: onezero[1] += 1
         
-        packet = 0
-        packet |= (self.data[0] & 0x3FFFFFFF) << 98
-        packet |= (self.data[1] & 0x3FFFFFFF) << 68
-        packet |= (self.data[2] & 0x3FFFFFFF) << 38
-        packet |= (self.data[3] & 0x7F) << 31
-        packet |= (self.data[4] & 0x7F) << 24
-        packet |= (self.data[5] & 0x7F) << 17
-        
-        # 格式化为 32位 16进制字符串 (128 bits / 4 = 32 chars)
-        hex_str = f"{packet:032x}"
-        self.f_out.write(hex_str + "\n")
-        # print(f"Ch{self.ch_id} Packet: {hex_str}")
+        if onezero[1] != 30:
+            if onezero[0] == 15: pass 
+            else: return -3 
+        return ic 
 
-def process_csv(filename):
+    def push_bits_recursive(self, bit_val, count, writer_func):
+        remaining = count
+        while remaining > 0:
+            if self.header == 0:
+                self.headerbuf = ((self.headerbuf << 1) | bit_val) & HEADER_MASK
+                remaining -= 1
+                if self.headerbuf == HEADER_PATTERN:
+                    self.header = self.headerbuf
+                    self.headerbuf = 0
+            else:
+                idx = self.id[0]
+                self.data[idx] = ((self.data[idx] << 1) | bit_val) 
+                remaining -= 1
+                self.id[1] += 1
+                
+                idflag = False
+                if 0 <= self.id[0] < 3:
+                    if self.id[1] >= 30: idflag = True
+                else:
+                    if self.id[1] >= 7: idflag = True
+                
+                if idflag:
+                    self.id[0] += 1
+                    self.id[1] = 0
+                    check_idx = self.id[0] - 1
+                    if 0 <= check_idx < 3:
+                        check_res = self.getfinecode(self.data[check_idx])
+                        if check_res < 0:
+                            self.clear(level=0) 
+                            self.header = 0 
+                            self.data = [0]*6
+                            self.id = [0,0]
+                            continue 
+
+                if self.id[0] >= 6:
+                    writer_func(self.data) 
+                    self.clear(level=0)
+
+def write_packet_to_file(f, data):
+    packet = 0
+    packet |= (data[0] & 0x3FFFFFFF) << 98
+    packet |= (data[1] & 0x3FFFFFFF) << 68
+    packet |= (data[2] & 0x3FFFFFFF) << 38
+    packet |= (data[3] & 0x7F) << 31
+    packet |= (data[4] & 0x7F) << 24
+    packet |= (data[5] & 0x7F) << 17
+    f.write(f"{packet:032x}\n")
+
+def process_file(filename):
     if not os.path.exists(filename):
-        print(f"Error: File {filename} not found.")
+        print(f"Error: File '{filename}' not found.")
         return
 
     print(f"Processing {filename} ...")
     
-    # 初始化两个通道的解码器
-    decoders = [
-        ChannelDecoder(1, OUT_FILE_CH1),
-        ChannelDecoder(2, OUT_FILE_CH2)
-    ]
+    f_ch1 = open(OUT_FILE_CH1, 'w')
+    f_ch2 = open(OUT_FILE_CH2, 'w')
     
-    # 状态变量 [Ch1, Ch2]
+    ev = [ChannelEvent(), ChannelEvent()]
     prev_stat = [-1, -1]
-    ticks_cnt = [0, 0] # tnt
+    tnt = [0, 0] 
+
+    def write_ch1(data): write_packet_to_file(f_ch1, data)
+    def write_ch2(data): write_packet_to_file(f_ch2, data)
+    writers = [write_ch1, write_ch2]
+
+    line_count = 0
+    data_line_count = 0
+    packet_counts = [0, 0]
+
+    try:
+        f = open(filename, 'r', encoding='utf-8-sig')
+    except:
+        f = open(filename, 'r')
+
+    start_reading = False
     
-    with open(filename, 'r') as f:
-        start_reading = False
+    for line in f:
+        line = line.strip()
+        if not line: continue
+        line_count += 1
         
-        for line in f:
-            line = line.strip()
-            if not line: continue
-            
-            # 自动跳过头部，直到找到以数字或符号开头的行
-            if not start_reading:
-                if line[0].isdigit() or line[0] == '-' or line[0] == '+':
-                    start_reading = True
-                else:
-                    continue
-            
-            # 解析 CSV (Time, Ch1, Ch2)
-            parts = line.split(',')
-            if len(parts) < 3: continue
-            
+        parts = line.split(',')
+        
+        # 头部跳过逻辑
+        if not start_reading:
             try:
-                # time_val = float(parts[0]) # Python 不需要用到时间戳，只需要顺序
-                volts = [float(parts[1]), float(parts[2])]
+                float(parts[0])
+                if len(parts) >= 2: # 只要有至少两列就可以开始尝试
+                    start_reading = True
+                    print(f"[DEBUG] Found data start at Line {line_count}")
+                else: continue
             except ValueError:
                 continue
-                
-            # 处理两个通道
-            for i in range(2):
-                # 1. 数字化 (Digitize)
-                curr_stat = 1 if volts[i] >= THRESHOLD else 0
-                
-                # 2. 边沿检测 (Edge Detection)
-                if curr_stat != prev_stat[i]:
-                    if prev_stat[i] != -1:
-                        # 状态翻转了，结算上一个状态的长度
-                        dt_ns = ticks_cnt[i] * SAMDT
-                        nb = decoders[i].translate_code(dt_ns)
-                        
-                        # 将比特推入解码器
-                        decoders[i].push_bits(prev_stat[i], nb)
-                        
-                    # 重置计数器，更新状态
-                    ticks_cnt[i] = 0
-                    prev_stat[i] = curr_stat
-                
-                # 3. 累加计数器
-                ticks_cnt[i] += 1
-                
-    # 关闭文件
-    decoders[0].close()
-    decoders[1].close()
-    print(f"Done! Outputs saved to {OUT_FILE_CH1} and {OUT_FILE_CH2}")
+
+        # === 核心修改：适配 5列 CSV 格式 ===
+        # 格式预期: Time1(0), Volts1(1), Empty(2), Time2(3), Volts2(4)
+        if len(parts) < 2: continue
+        
+        try:
+            # 获取 Ch1 电压 (第 1 列)
+            v1 = float(parts[1])
+            
+            # 获取 Ch2 电压 (根据格式自动判断)
+            if len(parts) >= 5:
+                # 泰克示波器 Side-by-Side 格式 (你的格式)
+                # 跳过 parts[2] (空) 和 parts[3] (Time2)
+                v2 = float(parts[4])
+            elif len(parts) >= 3:
+                # 标准格式: Time, Ch1, Ch2
+                # 如果 parts[2] 是空的，说明是上面的格式但行没对齐，fallback
+                if parts[2].strip() == "":
+                     # 尝试找后面非空的
+                     if len(parts) > 4: v2 = float(parts[4])
+                     else: continue
+                else:
+                    v2 = float(parts[2])
+            else:
+                # 只有一列数据的情况
+                v2 = 0.0
+            
+            volts = [v1, v2]
+            
+        except (ValueError, IndexError):
+            # 如果某一行数据损坏，跳过
+            continue
+        # =================================
+
+        data_line_count += 1
+        
+        # 处理逻辑不变
+        for i in range(2):
+            curr_stat = 1 if volts[i] >= THRESHOLD else 0
+            if curr_stat != prev_stat[i]:
+                if prev_stat[i] != -1:
+                    dt_ns = tnt[i] * SAMDT
+                    nb = ev[i].translatecode(dt_ns)
+                    if nb > 0:
+                        def wrapped_writer(d):
+                            writers[i](d)
+                            packet_counts[i] += 1
+                        ev[i].push_bits_recursive(prev_stat[i], nb, wrapped_writer)
+                tnt[i] = 0
+                prev_stat[i] = curr_stat
+            tnt[i] += 1
+
+    f.close()
+    f_ch1.close()
+    f_ch2.close()
+    
+    print("-" * 30)
+    print(f"Summary:")
+    print(f"Total Lines Scanned: {line_count}")
+    print(f"Data Lines Processed: {data_line_count}")
+    print(f"Ch1 Packets: {packet_counts[0]}")
+    print(f"Ch2 Packets: {packet_counts[1]}")
+    
+    if packet_counts[0] == 0:
+        print("\n[HINT] Ch1 count is 0. Check THRESHOLD (Currently {:.2f}V).".format(THRESHOLD))
+        print("Your data starts with: {:.3f} V".format(volts[0] if 'volts' in locals() else 0))
 
 if __name__ == "__main__":
-    # 如果命令行没有参数，使用默认 INPUT_CSV，否则使用参数
-    input_file = sys.argv[1] if len(sys.argv) > 1 else INPUT_CSV
-    process_csv(input_file)
+    target_file = sys.argv[1] if len(sys.argv) > 1 else INPUT_CSV
+    process_file(target_file)

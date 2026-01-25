@@ -1,7 +1,6 @@
 `timescale 1ns / 1ps
 
 module DataPack_AFIFO#(
-    parameter ADC_WIDTH = 8,
     parameter DATAWIDTH = 16,
     parameter ADC_CHANEL = 8,
     parameter FIFO_DEPTH = 16 

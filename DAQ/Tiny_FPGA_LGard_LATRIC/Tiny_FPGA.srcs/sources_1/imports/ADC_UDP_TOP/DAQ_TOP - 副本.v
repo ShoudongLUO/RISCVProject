@@ -25,7 +25,7 @@ parameter REAL_DATA_CHANEL=2
     output wire rsp_valid_o,
     input wire rsp_ready_i,
     // ADC Input
-    input [ADC_CHANEL*ADC_WIDTH-1:0] rec_ADC_data,
+    input [REAL_DATA_CHANEL*REAL_DATA_WIDTH-1:0] rec_ADC_data,
     (* MARK_DEBUG="true" *)input wire adc_data_ready,
     // Ethernet PHY Interface (RGMII)
     output eth_txc,      // RGMII TX Clock
@@ -54,7 +54,7 @@ parameter REAL_DATA_CHANEL=2
     (* MARK_DEBUG="true" *)reg [ADC_CHANEL*DATAWIDTH-1:0] cal_adc_value;
     reg [ADC_CHANEL*DATAWIDTH-1:0] adc_test;
     reg data_accepted_rib;
-    (* MARK_DEBUG="true" *)wire [ADC_CHANEL*ADC_WIDTH-1:0] adc_data_dly;
+    (* MARK_DEBUG="true" *)wire [REAL_DATA_CHANEL*REAL_DATA_WIDTH-1:0] adc_data_dly;
     reg [3:0]  cfg_adc_width;
     reg [5:0]  cfg_datawidth;
     reg [21:0] cfg_num_channels;
@@ -403,13 +403,12 @@ wire [31:0] word_in_channel_index; // 当前地址对应的是该通道内的第
         .ADC_CHANEL(ADC_CHANEL)
     ) u_adc_core (
         .adc_clk(clk),
-        .sys_clk(clk_udp),
+        .sys_clk(clk),
         .rst_n(rst_n),
         .data_accepted_rib(data_accepted_rib),
         .adc_data_in(adc_data_dly),
-        .fifo_wr_en(1'b1),
-      //  .sys_status(sys_status),
-        .sys_status(5'd6 | {4'd0, ~tx_req} ),
+        .fifo_wr_en(ctrl_fifo_wr_en),
+        .sys_status(sys_status),
         .ADC_DATA(fifo_data_out),
         .fifo_full(fifo_full),
         .fifo_empty(fifo_empty),
@@ -419,7 +418,7 @@ wire [31:0] word_in_channel_index; // 当前地址对应的是该通道内的第
     // UDP Core Instance
     // This module is defined in an external file
     udp_core #(
-        .DATAWIDTH(DATAWIDTH),
+        .ADC_WIDTH(ADC_WIDTH),
         .ADC_CHANEL(ADC_CHANEL)
     ) u_udp_core (
         .clk_udp(clk_udp),
@@ -430,7 +429,7 @@ wire [31:0] word_in_channel_index; // 当前地址对应的是该通道内的第
         .des_port(cfg_des_port),
         .tx_data_num(cfg_tx_data_num),
         .udp_tx_enable(ctrl_udp_tx_enable),
-        .tx_udp_data(fifo_data_out),
+        .tx_udp_data(udp_tx_data),
         .tx_req(tx_req),
         .eth_txc(eth_txc),
         .eth_tx_ctl(eth_tx_ctl),
@@ -439,11 +438,11 @@ wire [31:0] word_in_channel_index; // 当前地址对应的是该通道内的第
         .DataAccept(1'b1),
         .udp_busy(udp_busy)
     );
-/*
+
     // DataPack Instance
     // This module is defined in an external file
     DataPack_AFIFO #(
-        .DATAWIDTH(DATAWIDTH),
+        .ADC_WIDTH(ADC_WIDTH),
         .ADC_CHANEL(ADC_CHANEL)
     ) u_data_pack(
         .fee_mode(fee_mode),
@@ -454,9 +453,11 @@ wire [31:0] word_in_channel_index; // 当前地址对应的是该通道内的第
         .sys_rst_n(rst_n),
         .sys_message_sending(sys_message_sending),
         .tx_data_fifo(cal_adc_value),
+        .adc_baseline(baseline_rib_data),
+        .adc_noise(adc_noise),
         .udp_tx_data(udp_tx_data)
     );
-    */
+    
     // vld_rdy Instance
     // This module is defined in an external file
    vld_rdy #(

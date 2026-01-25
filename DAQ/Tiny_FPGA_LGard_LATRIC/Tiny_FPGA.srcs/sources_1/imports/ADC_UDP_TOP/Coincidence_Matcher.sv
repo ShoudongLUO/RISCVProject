@@ -1,5 +1,6 @@
 module coincidence_analyzer #(
     parameter FIFO_DEPTH        = 64,
+    parameter DATA_WIDTH        = 16,
     parameter signed [63:0] MATCH_WINDOW_PS = 64'd3000,  // 3 ns Match Window
     parameter signed [63:0] REF_PERIOD_PS   = 64'd55555  // 18 MHz Clock Period (~55.5ns)
 )(
@@ -11,11 +12,11 @@ module coincidence_analyzer #(
 
     // Channel 1 Input (From TDC Module)
     input  logic        ch1_valid_in,
-    input  logic [63:0] ch1_time_in, // Absolute Timestamp (Coarse + Fine)
+    input  logic [DATA_WIDTH-1:0] ch1_time_in, // Absolute Timestamp (Coarse + Fine)
 
     // Channel 2 Input (From TDC Module)
     input  logic        ch2_valid_in,
-    input  logic [63:0] ch2_time_in,
+    input  logic [DATA_WIDTH-1:0] ch2_time_in,
 
     // =========================================================================
     // DOMAIN 2: SYSTEM ANALYSIS DOMAIN (Slow/Sys Clock)
@@ -24,7 +25,7 @@ module coincidence_analyzer #(
 
     // Combined Output (Matched & Corrected)
     output logic        match_valid_out,
-    output logic signed [63:0] time_diff_out // dtm (Corrected Delta)
+    output logic signed [DATA_WIDTH-1:0] time_diff_out // dtm (Corrected Delta)
 );
 
     // =========================================================================
@@ -48,14 +49,14 @@ module coincidence_analyzer #(
     // Internal Signals
     logic        ch1_wr_ready, ch2_wr_ready;
     logic        ch1_rvalid,   ch2_rvalid;
-    logic [63:0] ch1_dout,     ch2_dout;
+    logic [15:0] ch1_dout,     ch2_dout;
     logic        ch1_pop_req,  ch2_pop_req;
     
   
     logic [$clog2(FIFO_DEPTH+1)-1:0] unused_depth1, unused_depth2;
 
     // FIFO Channel 1
-    prim_fifo_async #( .Width(64), .Depth(FIFO_DEPTH) ) u_fifo_ch1 (
+    prim_fifo_async #( .Width(DATA_WIDTH), .Depth(FIFO_DEPTH) ) u_fifo_ch1 (
         .clk_wr_i (tdc_clk),      .rst_wr_ni(rst_sync[0]),
         .wvalid_i (ch1_valid_in), .wready_o (ch1_wr_ready),
         .wdata_i  (ch1_time_in),  .wdepth_o (),
@@ -66,7 +67,7 @@ module coincidence_analyzer #(
     );
 
     // FIFO Channel 2
-    prim_fifo_async #( .Width(64), .Depth(FIFO_DEPTH) ) u_fifo_ch2 (
+    prim_fifo_async #( .Width(16), .Depth(FIFO_DEPTH) ) u_fifo_ch2 (
         .clk_wr_i (tdc_clk),      .rst_wr_ni(rst_sync[0]),
         .wvalid_i (ch2_valid_in), .wready_o (ch2_wr_ready),
         .wdata_i  (ch2_time_in),  .wdepth_o (),
@@ -80,7 +81,7 @@ module coincidence_analyzer #(
     // 3. STAGE A: SLIDING WINDOW MATCHING (Combinational)
     // =========================================================================
     
-    logic signed [63:0] raw_delta_t;
+    logic signed [DATA_WIDTH-1:0] raw_delta_t;
     logic               match_detected;
     
     always_comb begin
@@ -121,7 +122,7 @@ module coincidence_analyzer #(
     // =========================================================================
     // folding the delta into +/- Half Period range.
     
-    localparam signed [63:0] HALF_PERIOD = REF_PERIOD_PS >>> 1; // Divide by 2
+    localparam signed [DATA_WIDTH-1:0] HALF_PERIOD = REF_PERIOD_PS >>> 1; // Divide by 2
 
     always_ff @(posedge sys_clk or negedge rst_sync[1]) begin
         if (!rst_sync[1]) begin
