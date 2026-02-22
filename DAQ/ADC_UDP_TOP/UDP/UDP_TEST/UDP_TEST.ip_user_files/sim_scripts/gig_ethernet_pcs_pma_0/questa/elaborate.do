@@ -1,0 +1,1 @@
+vopt -l elaborate.log +acc=npr -suppress 10016  -L xil_defaultlib -L gig_ethernet_pcs_pma_v16_2_15 -L unisims_ver -L unimacro_ver -L secureip -work xil_defaultlib xil_defaultlib.gig_ethernet_pcs_pma_0 xil_defaultlib.glbl -o gig_ethernet_pcs_pma_0_opt
