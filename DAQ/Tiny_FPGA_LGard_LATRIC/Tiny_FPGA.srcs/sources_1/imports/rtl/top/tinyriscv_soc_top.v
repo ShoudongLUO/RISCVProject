@@ -54,12 +54,16 @@ module tinyriscv_soc_top(
     output wire spi_mosi,
     input  wire spi_miso,
     output wire[1:0] spi_csn,
-    input wire serial_data_in,
-    input wire data_valid_in,
-    output wire  [ADC_WIDTH*ADC_CHANEL-1:0]adc_data,
-    output wire  data_ready_out, // JUST FOR ADC FPGA TEST!
-    //ADC UDP Interface
-     
+
+    //TDC UDP Interface
+    input          clk_fast,      // 200MHz+ (Decoding Domain)
+
+
+    input   [127:0] ch1_data_in,
+    input          ch1_data_valid,
+
+    input   [127:0] ch2_data_in,
+    input           ch2_data_valid,
 
     output             eth_txc   , //RGMII发送数据时钟
     output             eth_tx_ctl, //RGMII输出数据有效信号
@@ -437,10 +441,10 @@ i2c_controller u_i2c (
         .spi_csn(spi_csn)
     );
 
-    parameter ADC_WIDTH = 32;
+    parameter ADC_WIDTH = 20;
     parameter DATAWIDTH = 32;
-    parameter REAL_DATA_WIDTH = 64;
-    parameter REAL_DATA_CHANEL= 1;
+    parameter REAL_DATA_WIDTH =20;
+    parameter REAL_DATA_CHANEL= 2;//channel0: TDC Data; Channel1: Debug Flag
             // 计算每个物理通道被拆分成了多少个32bit数据块
         // 例如 128 / 32 = 4 个数据块
         localparam CHUNKS_PER_PHY = REAL_DATA_WIDTH / DATAWIDTH; 
@@ -451,14 +455,43 @@ i2c_controller u_i2c (
 
     (* MARK_DEBUG="true" *)wire  [REAL_DATA_WIDTH*REAL_DATA_CHANEL-1:0]adc_data_1;
     (* MARK_DEBUG="true" *)wire  data_ready_out_1;
-
+/*
     sipo_converter #(.DATA_WIDTH(REAL_DATA_WIDTH*REAL_DATA_CHANEL)) sipo_a (
         .clk(clk), .rst_n(rst_n),
         .data_valid_in(data_valid_in), .serial_data_in(serial_data_in),
         .parallel_data_out(adc_data), .data_ready_out(data_ready_out)
     );
-    assign adc_data_1 = adc_data;
-    assign data_ready_out_1 =  data_ready_out;
+
+     sipo_converter #(.DATA_WIDTH(REAL_DATA_WIDTH*REAL_DATA_CHANEL)) sipo_a (
+        .clk(clk), .rst_n(rst_n),
+        .data_valid_in(data_valid_in), .serial_data_in(serial_data_in),
+        .parallel_data_out(adc_data), .data_ready_out(data_ready_out)
+    );*/
+    wire [15:0]time_diff_ps_out;
+    wire [17:0]data_flag;
+      top_dual_channel_analysis #(
+        .MATCH_WINDOW_PS (64'd50000), // Relaxed window for testing (10ns)
+        .FIFO_DEPTH      (64)
+    ) dut (
+        .clk_fast       (clk_fast),
+        .clk_sys        (clk),
+        .rst_n          (rst_n),
+        
+        .ch1_data_in    (ch1_data_in),
+        .ch1_data_valid (ch1_data_valid),
+        
+        .ch2_data_in    (ch2_data_in),
+        .ch2_data_valid (ch2_data_valid),
+        
+        .match_valid_out(data_ready_out_1),
+        .time_diff_ps_out(time_diff_ps_out),
+        .data_flag      (data_flag),
+        .ch1_decode_error(ch1_decode_err),
+        .ch2_decode_error(ch2_decode_err)
+    );
+
+    assign adc_data_1 = {ch2_decode_err,data_flag[17:9],ch1_decode_err,data_flag[8:0],4'b0,time_diff_ps_out};
+   // assign data_ready_out_1 =  match_valid_out;
     // top模块例化
     DAQ_UDP_top #(
         .ADC_WIDTH(ADC_WIDTH),      // ADC数据宽度12位
@@ -466,7 +499,7 @@ i2c_controller u_i2c (
         .REAL_DATA_WIDTH(REAL_DATA_WIDTH),
         .REAL_DATA_CHANEL(REAL_DATA_CHANEL),
         .IsSplitData(IsSplitData),
-        .ADC_CHANEL(ADC_CHANEL)      // ADC通道数2个
+        .ADC_CHANEL(ADC_CHANEL)      
     ) u_DAQ_UDP_top_inst (
         // 时钟和复位
         .clk(clk),

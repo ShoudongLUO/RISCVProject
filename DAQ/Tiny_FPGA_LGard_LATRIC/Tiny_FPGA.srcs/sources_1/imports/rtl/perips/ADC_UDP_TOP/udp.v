@@ -51,6 +51,7 @@ assign  crc_d8 = gmii_txd;
 
 //以太网发送模块
 udp_tx    #(
+    .DATAWIDTH(DATAWIDTH),
         .ADC_CHANEL(ADC_CHANEL)
     )
     u_udp_tx

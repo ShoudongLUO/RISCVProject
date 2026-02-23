@@ -165,7 +165,8 @@ parameter ADC_CHANEL = 1
     );
 
     udp #(
-        .ADC_CHANEL(ADC_CHANEL)
+        .ADC_CHANEL(ADC_CHANEL),
+                .DATAWIDTH(DATAWIDTH)
     )u_udp 
     (
         .BOARD_MAC     (BOARD_MAC),

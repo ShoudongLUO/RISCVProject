@@ -31,7 +31,7 @@ parameter REAL_DATA_CHANEL=2
 (
     input adc_clk,
     input rst_n,
-    input  [REAL_DATA_CHANEL*REAL_DATA_WIDTH-1:0] adc_data_in,
+    input  [ADC_CHANEL*ADC_WIDTH-1:0] adc_data_in,
     input fifo_wr_en,
     input sys_clk,
 
@@ -119,10 +119,6 @@ always @(posedge sys_clk or negedge udp_rst_n_sync) begin
 end
 assign ADC_DATA =fifo_data_out;
 wire [ADC_CHANEL*DATAWIDTH-1:0] all_channel_data;
-
-    // parameter REAL_ADC_WIDTH = 128; // 原始物理单通道位宽 (例如 128bit)
-
-    wire [ADC_CHANEL*DATAWIDTH-1:0] all_channel_data;
  localparam LOGICAL_PER_PHY = ADC_CHANEL /REAL_DATA_CHANEL;
     generate
         genvar i;
