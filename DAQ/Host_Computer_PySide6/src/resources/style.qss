@@ -1,0 +1,212 @@
+/* ===== Light Theme — Material Design Colors ===== */
+
+/* Global */
+QMainWindow {
+    background-color: #FAFAFA;
+}
+
+QWidget {
+    font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+    font-size: 10pt;
+}
+
+/* Group Boxes */
+QGroupBox {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    margin-top: 1.4em;
+    padding: 10px 6px 6px 6px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 0px;
+    padding: 4px 12px;
+    background-color: #1976D2;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+/* Push Buttons */
+QPushButton {
+    background-color: #1976D2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-weight: bold;
+    min-height: 24px;
+}
+
+QPushButton:hover {
+    background-color: #1565C0;
+}
+
+QPushButton:pressed {
+    background-color: #0D47A1;
+}
+
+QPushButton:disabled {
+    background-color: #BDBDBD;
+    color: #757575;
+}
+
+/* Stop / Reset — red variant */
+QPushButton[cssClass="danger"] {
+    background-color: #F44336;
+}
+
+QPushButton[cssClass="danger"]:hover {
+    background-color: #D32F2F;
+}
+
+QPushButton[cssClass="danger"]:pressed {
+    background-color: #B71C1C;
+}
+
+/* Active toggle — green variant */
+QPushButton:checked {
+    background-color: #4CAF50;
+}
+
+QPushButton:checked:hover {
+    background-color: #388E3C;
+}
+
+/* Line Edits */
+QLineEdit {
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background-color: #FFFFFF;
+}
+
+QLineEdit:focus {
+    border: 2px solid #1976D2;
+}
+
+/* Spin Boxes */
+QSpinBox {
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background-color: #FFFFFF;
+}
+
+QSpinBox:focus {
+    border: 2px solid #1976D2;
+}
+
+/* Labels */
+QLabel {
+    color: #212121;
+}
+
+/* Text Edits (read-only data displays) */
+QTextEdit[readOnly="true"] {
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+}
+
+/* Log Panel — dark terminal */
+QPlainTextEdit#logPanel {
+    background-color: #263238;
+    color: #ECEFF1;
+    border: 1px solid #37474F;
+    border-radius: 4px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 9pt;
+}
+
+/* Tab Widget */
+QTabWidget::pane {
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    top: -1px;
+}
+
+QTabBar::tab {
+    background-color: #ECEFF1;
+    border: 1px solid #E0E0E0;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 6px 16px;
+    margin-right: 2px;
+    font-weight: bold;
+    color: #616161;
+}
+
+QTabBar::tab:selected {
+    background-color: #FFFFFF;
+    color: #1976D2;
+    border-bottom: 2px solid #1976D2;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #E3F2FD;
+    color: #1976D2;
+}
+
+/* Scroll Area */
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: transparent;
+}
+
+/* Splitter handle */
+QSplitter::handle {
+    background-color: #E0E0E0;
+    width: 2px;
+    height: 2px;
+}
+
+/* Status Bar */
+QStatusBar {
+    background-color: #ECEFF1;
+    border-top: 1px solid #E0E0E0;
+    color: #616161;
+}
+
+/* Mode Label */
+QLabel#modeLabel {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #1976D2;
+    background-color: #E3F2FD;
+    border-radius: 4px;
+    padding: 6px 12px;
+    qproperty-alignment: AlignCenter;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    background: #F5F5F5;
+    width: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #BDBDBD;
+    border-radius: 5px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #9E9E9E;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
