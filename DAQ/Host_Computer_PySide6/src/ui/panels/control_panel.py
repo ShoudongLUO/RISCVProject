@@ -1,5 +1,6 @@
 """Control panel — mode buttons, UART debug, reset, file send.
 
+Dark scientific instrument styling with mode indicator and grouped controls.
 Uses QScrollArea to prevent overlap in narrow panel widths.
 """
 
@@ -46,9 +47,9 @@ class ControlPanel(QWidget):
         layout.setSpacing(6)
 
         # --- Mode control ---
-        mode_group = QGroupBox("Mode")
+        mode_group = QGroupBox("Device Mode")
         mode_layout = QVBoxLayout()
-        mode_layout.setSpacing(4)
+        mode_layout.setSpacing(6)
 
         self._mode_label = QLabel("IDLE")
         self._mode_label.setObjectName("modeLabel")
@@ -60,15 +61,15 @@ class ControlPanel(QWidget):
         self._btn_stop_proc.setProperty("cssClass", "danger")
 
         mode_layout.addWidget(self._mode_label)
+
         mode_btn_row = QHBoxLayout()
-        btn_row_spacing = 3
-        mode_btn_row.setSpacing(btn_row_spacing)
+        mode_btn_row.setSpacing(4)
         mode_btn_row.addWidget(self._btn_idle)
         mode_btn_row.addWidget(self._btn_calibration)
         mode_layout.addLayout(mode_btn_row)
 
         mode_btn_row2 = QHBoxLayout()
-        mode_btn_row2.setSpacing(btn_row_spacing)
+        mode_btn_row2.setSpacing(4)
         mode_btn_row2.addWidget(self._btn_data_acquire)
         mode_btn_row2.addWidget(self._btn_stop_proc)
         mode_layout.addLayout(mode_btn_row2)
@@ -140,6 +141,10 @@ class ControlPanel(QWidget):
     @Slot(str)
     def update_mode(self, mode_text: str) -> None:
         self._mode_label.setText(mode_text)
+
+    @property
+    def current_mode_text(self) -> str:
+        return self._mode_label.text()
 
     @property
     def file_name(self) -> str:

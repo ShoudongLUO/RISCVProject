@@ -1,4 +1,8 @@
-"""TDC numeric dashboard panel — per-channel ticks, coincidence stats."""
+"""TDC numeric dashboard panel — per-channel ticks, coincidence stats.
+
+Dark scientific instrument styling with monospace data readouts
+and color-coded coincidence statistics.
+"""
 
 from __future__ import annotations
 
@@ -13,6 +17,19 @@ from PySide6.QtWidgets import (
 )
 
 from ...core.models import CoincidenceMatch, TdcEvent
+
+_VALUE_STYLE = (
+    "font-weight: bold; font-size: 12pt; color: #00e5ff; "
+    "font-family: 'Consolas', 'Cascadia Mono', monospace;"
+)
+_STAT_STYLE = (
+    "font-weight: bold; font-size: 11pt; color: #69f0ae; "
+    "font-family: 'Consolas', monospace;"
+)
+_COUNT_STYLE = (
+    "font-weight: bold; color: #ffd740; "
+    "font-family: 'Consolas', monospace;"
+)
 
 
 class TdcPanel(QWidget):
@@ -30,14 +47,15 @@ class TdcPanel(QWidget):
         for ch in range(2):
             group = QGroupBox(f"TDC Channel {ch}")
             form = QFormLayout()
+            form.setSpacing(6)
             labels: dict[str, QLabel] = {}
             for field_name in ("TOT", "TOA", "CAL", "LSB (ps)", "Flags"):
                 lbl = QLabel("--")
-                lbl.setStyleSheet("font-weight: bold; font-size: 11pt;")
+                lbl.setStyleSheet(_VALUE_STYLE)
                 form.addRow(f"{field_name}:", lbl)
                 labels[field_name] = lbl
             event_count_lbl = QLabel("0")
-            event_count_lbl.setStyleSheet("font-weight: bold;")
+            event_count_lbl.setStyleSheet(_COUNT_STYLE)
             form.addRow("Events:", event_count_lbl)
             labels["Events"] = event_count_lbl
             group.setLayout(form)
@@ -49,19 +67,25 @@ class TdcPanel(QWidget):
         # --- Coincidence stats ---
         coinc_group = QGroupBox("Coincidence")
         coinc_form = QFormLayout()
+        coinc_form.setSpacing(8)
 
         self._dtm_label = QLabel("--")
-        self._dtm_label.setStyleSheet("font-weight: bold; font-size: 12pt;")
+        self._dtm_label.setStyleSheet(
+            "font-weight: bold; font-size: 14pt; color: #ff4081; "
+            "font-family: 'Consolas', 'Cascadia Mono', monospace;"
+        )
         coinc_form.addRow("Delta-T (ps):", self._dtm_label)
 
         self._coinc_count_label = QLabel("0")
-        self._coinc_count_label.setStyleSheet("font-weight: bold;")
+        self._coinc_count_label.setStyleSheet(_COUNT_STYLE)
         coinc_form.addRow("Total matches:", self._coinc_count_label)
 
         self._mean_dtm_label = QLabel("--")
+        self._mean_dtm_label.setStyleSheet(_STAT_STYLE)
         coinc_form.addRow("Mean Delta-T:", self._mean_dtm_label)
 
         self._std_dtm_label = QLabel("--")
+        self._std_dtm_label.setStyleSheet(_STAT_STYLE)
         coinc_form.addRow("Std Dev:", self._std_dtm_label)
 
         coinc_group.setLayout(coinc_form)

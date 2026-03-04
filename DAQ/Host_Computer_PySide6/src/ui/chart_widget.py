@@ -1,6 +1,7 @@
 """pyqtgraph real-time multi-channel line chart widget.
 
 Supports 20 ADC channels with distinct colors.
+Dark scientific instrument styling with neon trace colors.
 Maintains backward compat via add_point() for single-curve use.
 """
 
@@ -9,19 +10,42 @@ from __future__ import annotations
 import numpy as np
 import pyqtgraph as pg
 from PySide6.QtCore import Slot
+from PySide6.QtGui import QColor, QFont
 
 
-# 20 visually distinct colors (Material Design palette)
+# 20 visually distinct neon/scientific colors for dark background
 CHANNEL_COLORS = [
-    "#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5",
-    "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50",
-    "#8BC34A", "#CDDC39", "#FFC107", "#FF9800", "#FF5722",
-    "#795548", "#607D8B", "#E53935", "#1E88E5", "#43A047",
+    "#00e5ff",  # cyan
+    "#ff4081",  # pink
+    "#69f0ae",  # green
+    "#ffd740",  # amber
+    "#7c4dff",  # deep purple
+    "#ff6e40",  # deep orange
+    "#18ffff",  # cyan accent
+    "#b388ff",  # purple accent
+    "#64ffda",  # teal accent
+    "#ffff00",  # yellow
+    "#ea80fc",  # purple light
+    "#84ffff",  # cyan light
+    "#b9f6ca",  # green light
+    "#ff80ab",  # pink light
+    "#8c9eff",  # indigo light
+    "#ffe57f",  # amber light
+    "#a7ffeb",  # teal light
+    "#ff9e80",  # orange light
+    "#80d8ff",  # light blue
+    "#ccff90",  # light green
 ]
 
 NUM_CHANNELS = 20
 PEN_WIDTH = 1
 MAX_POINTS_PER_CHANNEL = 5000
+
+# Dark background color matching the QSS theme
+_BG_COLOR = "#181b20"
+_GRID_COLOR = (50, 60, 80, 100)  # RGBA — subtle blue-tinted grid
+_AXIS_COLOR = "#6b7280"
+_TITLE_COLOR = "#00e5ff"
 
 
 class ChartWidget(pg.PlotWidget):
@@ -30,13 +54,29 @@ class ChartWidget(pg.PlotWidget):
     BUFFER_FLUSH = 100  # legacy compat
 
     def __init__(self, parent=None) -> None:
-        super().__init__(parent, background="w")
+        super().__init__(parent, background=_BG_COLOR)
 
-        self.setLabel("bottom", "Sample #")
-        self.setLabel("left", "ADC Value (12-bit)")
-        self.setTitle("Multi-Channel ADC Data")
-        self.showGrid(x=True, y=True, alpha=0.3)
-        self.addLegend(offset=(10, 10))
+        # Axis styling
+        title_font = QFont("Segoe UI", 11, QFont.Weight.Bold)
+        axis_font = QFont("Consolas", 9)
+
+        for axis_name in ("bottom", "left"):
+            axis = self.getAxis(axis_name)
+            axis.setPen(pg.mkPen(_AXIS_COLOR, width=1))
+            axis.setTextPen(pg.mkPen(_AXIS_COLOR))
+            axis.setTickFont(axis_font)
+
+        self.setLabel("bottom", "Sample #", color=_AXIS_COLOR)
+        self.setLabel("left", "ADC Value (12-bit)", color=_AXIS_COLOR)
+
+        title_item = self.getPlotItem().titleLabel
+        title_item.setText("Multi-Channel ADC Data", color=_TITLE_COLOR)
+
+        self.showGrid(x=True, y=True, alpha=0.15)
+        self.getPlotItem().getViewBox().setBackgroundColor(QColor(_BG_COLOR))
+
+        legend = self.addLegend(offset=(10, 10))
+        legend.setLabelTextColor(_AXIS_COLOR)
 
         # Per-channel curves
         self._curves: list[pg.PlotDataItem] = []

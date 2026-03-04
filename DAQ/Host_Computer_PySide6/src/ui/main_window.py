@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import traceback
 
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Qt, Slot
 from PySide6.QtWidgets import (
     QMainWindow,
     QSplitter,
@@ -18,7 +18,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from PySide6.QtCore import Qt
 
 from ..core.adc_parser import demux_frame_by_channel
 from ..core.data_parser import parse_datagram
@@ -45,8 +44,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self) -> None:
         super().__init__()
-        self.setWindowTitle("FPGA Data Acquisition")
-        self.setMinimumSize(1100, 700)
+        self.setWindowTitle("FPGA DAQ  |  Data Acquisition System")
+        self.setMinimumSize(1200, 750)
 
         # --- State ---
         self._state = AppState()
@@ -83,7 +82,7 @@ class MainWindow(QMainWindow):
         self._splitter.addWidget(self._network_panel)
         self._splitter.addWidget(self._log_panel)
         self._splitter.addWidget(self._control_panel)
-        self._splitter.setSizes([220, 500, 250])
+        self._splitter.setSizes([240, 520, 260])
 
         # Bottom tabs: ADC Chart | ADC Dashboard | TDC Charts | TDC Dashboard
         self._tabs = QTabWidget()
@@ -169,9 +168,7 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def _on_rebind(self) -> None:
-        host_ip = self._network_panel._host_ip.text()
-        host_port = int(self._network_panel._host_port.text() or "0")
-        self._udp.rebind(host_ip, host_port)
+        self._udp.rebind(self._network_panel.host_ip, self._network_panel.host_port)
 
     @Slot()
     def _on_stop(self) -> None:
@@ -180,16 +177,19 @@ class MainWindow(QMainWindow):
             self._data_file.close()
             self._data_file = None
         self.statusBar().showMessage("Disconnected")
+        self._network_panel.set_connected(False)
         self._logger.debug("UDP socket unbound")
 
     @Slot(str, int)
     def _on_bind_success(self, host: str, port: int) -> None:
         self.statusBar().showMessage(f"Listening on {host}:{port}")
+        self._network_panel.set_connected(True)
         self._logger.debug(f"IPAddress {host} Port {port}")
 
     @Slot(str)
     def _on_bind_failed(self, msg: str) -> None:
         self.statusBar().showMessage("Bind failed")
+        self._network_panel.set_connected(False)
         self._logger.error(msg)
 
     @Slot(bytes)
@@ -333,7 +333,7 @@ class MainWindow(QMainWindow):
         }
         expected = display_names.get(mode, mode.name)
 
-        if self._control_panel._mode_label.text() != expected:
+        if self._control_panel.current_mode_text != expected:
             self._retry.start(cmd)
 
     @Slot()
