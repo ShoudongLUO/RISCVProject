@@ -126,6 +126,7 @@ generate
       //  assign channel_id = (i+1) & 4'b1111;  // 位与操作确保4位
         wire [3:0] channel_id = i[3:0];
 assign all_channel_data[i*DATAWIDTH + ADC_WIDTH +: 4] = channel_id;
+
        // assign all_channel_data[(i+1)*DATAWIDTH-5:(i+1)*DATAWIDTH-ADC_WIDTH]=0;
     end
 endgenerate

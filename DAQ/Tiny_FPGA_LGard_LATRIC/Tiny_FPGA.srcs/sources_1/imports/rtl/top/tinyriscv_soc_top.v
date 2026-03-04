@@ -442,7 +442,7 @@ i2c_controller u_i2c (
     );
 
     parameter ADC_WIDTH = 20;
-    parameter DATAWIDTH = 32;
+    parameter DATAWIDTH = 24;
     parameter REAL_DATA_WIDTH =20;
     parameter REAL_DATA_CHANEL= 2;//channel0: TDC Data; Channel1: Debug Flag
             // 计算每个物理通道被拆分成了多少个32bit数据块

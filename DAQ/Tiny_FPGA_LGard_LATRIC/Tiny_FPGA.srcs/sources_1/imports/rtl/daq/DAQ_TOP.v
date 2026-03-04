@@ -170,7 +170,7 @@ parameter REAL_DATA_CHANEL=2
     // UDP Core
     // 逻辑：只要 FIFO 里有足够的数据（由内部 tx_req 判断），就始终允许发送
     udp_core #(
-        .DATAWIDTH(REAL_DATA_WIDTH),
+        .DATAWIDTH(DATAWIDTH),
         .ADC_CHANEL(ADC_CHANEL)
     ) u_udp_core (
         .clk_udp(clk_udp),
