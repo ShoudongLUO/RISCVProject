@@ -36,7 +36,7 @@ parameter ADC_CHANEL=12
     output [ADC_CHANEL*DATAWIDTH-1:0] ADC_DATA,
     output fifo_full,
     output fifo_empty,
-    
+
     // Control
     input [4:0] fee_mode,
     input [4:0] sys_status,
@@ -49,7 +49,6 @@ reg rst_s1_udp, rst_s2_udp;
 reg fifo_empty_sync;
 wire udp_rst_n_sync;
 wire [ADC_CHANEL*DATAWIDTH-1:0] fifo_data_out;
-wire BadData = (adc_data_in == {ADC_CHANEL*ADC_WIDTH{1'b0}});
 
 always @(posedge sys_clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -114,22 +113,84 @@ always @(posedge sys_clk or negedge udp_rst_n_sync) begin
             data_req <= 1'b0;
     end
 end
-assign ADC_DATA =fifo_data_out;
-wire [ADC_CHANEL*DATAWIDTH-1:0] all_channel_data  ;
+assign ADC_DATA = fifo_data_out;
 
-generate
-    genvar i;
-    for (i = 0; i < ADC_CHANEL; i = i + 1) begin : CHANNEL_PACKING
-        // 确保DATAWIDTH = 4 + ADC_WIDTH
-        assign all_channel_data[i*DATAWIDTH +: ADC_WIDTH] = adc_data_in[i*ADC_WIDTH +: ADC_WIDTH];//assign all_channel_data[i*DATAWIDTH+ADC_WIDTH-1:i*DATAWIDTH] = adc_data_in[(i+1)*ADC_WIDTH-1:i*ADC_WIDTH];
-      //  wire [3:0] channel_id;  // 明确声明4位宽
-      //  assign channel_id = (i+1) & 4'b1111;  // 位与操作确保4位
-        wire [3:0] channel_id = i[3:0];
-assign all_channel_data[i*DATAWIDTH + ADC_WIDTH +: 4] = channel_id;
+// =========================================================================
+// Protocol Injection FSM
+//   Replaces channel packing with protocol-formatted FIFO words.
+//   Generates 3 FIFO words per coincidence event:
+//     Word 0 (envelope): {0xAAAA, type=0x03, reserved=0x00, pkt_counter}
+//     Word 1 (record p1): {0x7DC2, time_diff_ps, data_flags}
+//     Word 2 (record p2): {ch1_err, ch2_err, padding}
+//
+// adc_data_in field map (packed by tinyriscv_soc_top):
+//   [15:0]   = time_diff_ps_out (16 bits)
+//   [19:16]  = 4'b0 padding
+//   [28:20]  = data_flag[8:0]
+//   [29]     = ch1_decode_err
+//   [38:30]  = data_flag[17:9]
+//   [39]     = ch2_decode_err
+// =========================================================================
+localparam FIFO_WIDTH = ADC_CHANEL * DATAWIDTH;
 
-       // assign all_channel_data[(i+1)*DATAWIDTH-5:(i+1)*DATAWIDTH-ADC_WIDTH]=0;
+reg [ADC_CHANEL*ADC_WIDTH-1:0] evt_data_r;
+reg [15:0] pkt_counter;
+reg [1:0]  inj_state;
+reg [FIFO_WIDTH-1:0] fifo_wr_data;
+reg fifo_wr_valid;
+
+wire [15:0] evt_time_diff  = evt_data_r[15:0];
+wire [8:0]  evt_flags_lo   = evt_data_r[28:20];
+wire        evt_ch1_err    = evt_data_r[29];
+wire [8:0]  evt_flags_hi   = evt_data_r[38:30];
+wire        evt_ch2_err    = evt_data_r[39];
+wire [15:0] evt_data_flags = {evt_flags_hi[6:0], evt_flags_lo};
+
+always @(posedge adc_clk or negedge rst_n) begin
+    if (!rst_n) begin
+        inj_state      <= 2'd0;
+        pkt_counter    <= 16'd0;
+        fifo_wr_valid  <= 1'b0;
+        fifo_wr_data   <= {FIFO_WIDTH{1'b0}};
+        evt_data_r     <= {(ADC_CHANEL*ADC_WIDTH){1'b0}};
+    end else begin
+        case (inj_state)
+            2'd0: begin // IDLE — wait for new event
+                fifo_wr_valid <= 1'b0;
+                if (fifo_wr_en && !fifo_full) begin
+                    evt_data_r <= adc_data_in;
+                    inj_state  <= 2'd1;
+                end
+            end
+
+            2'd1: begin // Word 0 — envelope
+                fifo_wr_data  <= {16'hAAAA, 8'h03, 8'h00, pkt_counter};
+                fifo_wr_valid <= 1'b1;
+                inj_state     <= 2'd2;
+            end
+
+            2'd2: begin // Word 1 — coincidence record first 6 bytes
+                fifo_wr_data  <= {16'h7DC2, evt_time_diff, evt_data_flags};
+                fifo_wr_valid <= 1'b1;
+                inj_state     <= 2'd3;
+            end
+
+            2'd3: begin // Word 2 — coincidence record last 2 bytes + padding
+                fifo_wr_data  <= {{7'b0, evt_ch1_err},
+                                   {7'b0, evt_ch2_err},
+                                   {(FIFO_WIDTH - 16){1'b0}}};
+                fifo_wr_valid <= 1'b1;
+                pkt_counter   <= pkt_counter + 16'd1;
+                inj_state     <= 2'd0;
+            end
+
+            default: begin
+                inj_state     <= 2'd0;
+                fifo_wr_valid <= 1'b0;
+            end
+        endcase
     end
-endgenerate
+end
 
 
 localparam Depth = 64;
@@ -158,9 +219,9 @@ prim_fifo_async #(
     // 写端口
     .clk_wr_i   (adc_clk),
     .rst_wr_ni  (rst_test[0]),
-    .wvalid_i   (fifo_wr_en&&!BadData),
+    .wvalid_i   (fifo_wr_valid),
     .wready_o   (write_ready),
-    .wdata_i    (all_channel_data),
+    .wdata_i    (fifo_wr_data),
     .wdepth_o   (write_depth),
     
     // 读端口
@@ -171,6 +232,6 @@ prim_fifo_async #(
     .rdata_o    (fifo_data_out),
     .rdepth_o   (read_depth)
 );
-assign fifo_full = (write_depth == 11'd64);  // 深度达到最大值时为满
-assign fifo_empty = (read_depth == 11'd0);     // 深度为0时为空
+assign fifo_full = (write_depth == Depth);  // 深度达到最大值时为满
+assign fifo_empty = (read_depth == 0);     // 深度为0时为空
 endmodule

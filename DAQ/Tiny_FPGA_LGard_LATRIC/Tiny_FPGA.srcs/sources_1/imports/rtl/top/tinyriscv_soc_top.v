@@ -72,6 +72,13 @@ module tinyriscv_soc_top(
 
     );
 
+    // =========================================================================
+    // DAQ Parameters (moved to top of module body)
+    // =========================================================================
+    parameter ADC_WIDTH = 20;
+    parameter DATAWIDTH = 24;
+    parameter ADC_CHANEL = 2;
+
     // vcc3v3输出引脚
     assign vcc3v3 = 2'b11; // 固定输出3.3V
 
@@ -441,19 +448,7 @@ i2c_controller u_i2c (
         .spi_csn(spi_csn)
     );
 
-    parameter ADC_WIDTH = 20;
-    parameter DATAWIDTH = 24;
-    parameter REAL_DATA_WIDTH =20;
-    parameter REAL_DATA_CHANEL= 2;//channel0: TDC Data; Channel1: Debug Flag
-            // 计算每个物理通道被拆分成了多少个32bit数据块
-        // 例如 128 / 32 = 4 个数据块
-        localparam CHUNKS_PER_PHY = REAL_DATA_WIDTH / DATAWIDTH; 
-        
-        // 计算每个物理通道占用的逻辑通道总数 (数据块 + 1个包头)
-    parameter ADC_CHANEL =( CHUNKS_PER_PHY + 1)*REAL_DATA_CHANEL;
-    parameter IsSplitData = (CHUNKS_PER_PHY==1'b0)?1'b0:1'b1;
-
-    (* MARK_DEBUG="true" *)wire  [REAL_DATA_WIDTH*REAL_DATA_CHANEL-1:0]adc_data_1;
+    (* MARK_DEBUG="true" *)wire  [ADC_WIDTH*ADC_CHANEL-1:0]adc_data_1;
     (* MARK_DEBUG="true" *)wire  data_ready_out_1;
 /*
     sipo_converter #(.DATA_WIDTH(REAL_DATA_WIDTH*REAL_DATA_CHANEL)) sipo_a (
@@ -494,12 +489,9 @@ i2c_controller u_i2c (
    // assign data_ready_out_1 =  match_valid_out;
     // top模块例化
     DAQ_UDP_top #(
-        .ADC_WIDTH(ADC_WIDTH),      // ADC数据宽度12位
-        .DATAWIDTH(DATAWIDTH),      // 内部数据处理宽度16位
-        .REAL_DATA_WIDTH(REAL_DATA_WIDTH),
-        .REAL_DATA_CHANEL(REAL_DATA_CHANEL),
-        .IsSplitData(IsSplitData),
-        .ADC_CHANEL(ADC_CHANEL)      
+        .ADC_WIDTH(ADC_WIDTH),
+        .DATAWIDTH(DATAWIDTH),
+        .ADC_CHANEL(ADC_CHANEL)
     ) u_DAQ_UDP_top_inst (
         // 时钟和复位
         .clk(clk),
