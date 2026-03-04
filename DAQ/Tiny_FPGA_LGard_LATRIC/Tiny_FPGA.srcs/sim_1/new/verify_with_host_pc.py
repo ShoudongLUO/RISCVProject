@@ -22,18 +22,20 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 # Resolve the Host_Computer_PySide6 source so we can import the real parsers
 # ---------------------------------------------------------------------------
+# Script lives at:  DAQ/Tiny_FPGA_LGard_LATRIC/Tiny_FPGA.srcs/sim_1/new/
+# Target is:        DAQ/Host_Computer_PySide6/src/
+# So we need parents[3] to reach DAQ/
 _SCRIPT_DIR = Path(__file__).resolve().parent
-_HOST_PC_SRC = _SCRIPT_DIR.parent / "Host_Computer_PySide6" / "src"
+_DAQ_ROOT = _SCRIPT_DIR.parents[3]  # .../DAQ/
+_HOST_PC_SRC = _DAQ_ROOT / "Host_Computer_PySide6" / "src"
 
 if not _HOST_PC_SRC.is_dir():
-    # Try relative to DAQ root
-    _HOST_PC_SRC = _SCRIPT_DIR.parents[1] / "Host_Computer_PySide6" / "src"
-
-if _HOST_PC_SRC.is_dir():
-    sys.path.insert(0, str(_HOST_PC_SRC))
-else:
-    print(f"ERROR: Cannot find Host_Computer_PySide6/src (tried {_HOST_PC_SRC})")
+    print(f"ERROR: Cannot find Host_Computer_PySide6/src at {_HOST_PC_SRC}")
+    print(f"       Script dir: {_SCRIPT_DIR}")
+    print(f"       DAQ root:   {_DAQ_ROOT}")
     sys.exit(1)
+
+sys.path.insert(0, str(_HOST_PC_SRC))
 
 from core.data_parser import parse_datagram  # noqa: E402
 from core.protocol import PacketType  # noqa: E402
