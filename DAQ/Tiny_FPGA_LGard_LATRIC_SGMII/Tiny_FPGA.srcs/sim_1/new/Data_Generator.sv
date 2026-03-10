@@ -20,9 +20,16 @@ module fpga_tdc_test (
     output wire spi_sck, spi_mosi, 
     input  wire spi_miso, 
     output wire [1:0] spi_csn,
-    output wire eth_txc, eth_tx_ctl, eth_rst_n,
-    output wire [3:0] eth_txd,
+// Updated SGMII Interface
+    input  wire phy_sgmii_rx_p, phy_sgmii_rx_n,
+    output wire phy_sgmii_tx_p, phy_sgmii_tx_n,
+    input  wire phy_sgmii_clk_p, phy_sgmii_clk_n,
+    output wire phy_reset_n,
+    
+    // Status/Debug
+    output wire [15:0] sgmii_status_vector,
     output reg  [3:0] leds
+    
 );
 
     // =========================================================================
@@ -116,32 +123,38 @@ module fpga_tdc_test (
         end
     end
 
-    // ... 下面的代码保持不变 ...
-    
     // =========================================================================
-    // 2. DUT INSTANTIATION
+    // SGMII SOC INSTANTIATION
     // =========================================================================
-    tinyriscv_soc_top tinyriscv_soc_top_0 (
+    tinyriscv_soc_top_sgmii tinyriscv_soc_top_0 (
         .clk(clk),
         .rst_ext_i(rst_ext_i),
         .clk_125m(clk_125m),
-        .halted_ind(halted_ind),
+        .clk_fast(clk_fast),
+        
+        // Data from Simulation Memory
+        .ch1_data_in(ch1_data),
+        .ch1_data_valid(ch1_valid),
+        .ch2_data_in(ch2_data),
+        .ch2_data_valid(ch2_valid),
+
+        // SGMII PHY Interface
+        .phy_sgmii_rx_p(phy_sgmii_rx_p),
+        .phy_sgmii_rx_n(phy_sgmii_rx_n),
+        .phy_sgmii_tx_p(phy_sgmii_tx_p),
+        .phy_sgmii_tx_n(phy_sgmii_tx_n),
+        .phy_sgmii_clk_p(phy_sgmii_clk_p),
+        .phy_sgmii_clk_n(phy_sgmii_clk_n),
+        .phy_reset_n(phy_reset_n),
+        .sgmii_status_vector(sgmii_status_vector),
+       
         .uart_tx_pin(uart_tx_pin),
         .uart_rx_pin(uart_rx_pin),
         .gpio(gpio),
         .jtag_TCK(jtag_TCK), .jtag_TMS(jtag_TMS), .jtag_TDI(jtag_TDI), .jtag_TDO(jtag_TDO),
         .vcc3v3(vcc3v3),
         .i2c_scl(i2c_scl), .i2c_sda(i2c_sda),
-        .spi_sck(spi_sck), .spi_mosi(spi_mosi), .spi_miso(spi_miso), .spi_csn(spi_csn),
-        
-        // Connect Generated Data to SoC
-        .clk_fast(clk_fast),
-        .ch1_data_in(ch1_data),
-        .ch1_data_valid(ch1_valid),
-        .ch2_data_in(ch2_data),
-        .ch2_data_valid(ch2_valid),
-
-        .eth_txc(eth_txc), .eth_tx_ctl(eth_tx_ctl), .eth_rst_n(eth_rst_n), .eth_txd(eth_txd)
+        .spi_sck(spi_sck), .spi_mosi(spi_mosi), .spi_miso(spi_miso), .spi_csn(spi_csn)
     );
 
 endmodule

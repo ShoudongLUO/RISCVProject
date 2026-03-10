@@ -54,10 +54,16 @@ module tinyriscv_soc_top_sgmii(
     output wire spi_mosi,
     input  wire spi_miso,
     output wire[1:0] spi_csn,
-    input wire serial_data_in,
-    input wire data_valid_in,
-    output wire  [ADC_WIDTH*ADC_CHANEL-1:0]adc_data,
-    output wire  data_ready_out, // JUST FOR ADC FPGA TEST!
+  
+    //TDC UDP Interface
+    input          clk_fast,      // 200MHz+ (Decoding Domain)
+
+
+    input   [127:0] ch1_data_in,
+    input          ch1_data_valid,
+
+    input   [127:0] ch2_data_in,
+    input           ch2_data_valid,
 
     // SGMII PHY Interface
     input  wire   phy_sgmii_rx_p,
@@ -77,6 +83,13 @@ module tinyriscv_soc_top_sgmii(
     output wire [15:0] sgmii_status_vector
 
     );
+
+    // =========================================================================
+    // DAQ Parameters (moved to top of module body)
+    // =========================================================================
+    parameter ADC_WIDTH = 20;
+    parameter DATAWIDTH = 24;
+    parameter ADC_CHANEL = 2;
 
     // vcc3v3输出引脚
     assign vcc3v3 = 2'b11; // 固定输出3.3V
@@ -168,7 +181,7 @@ module tinyriscv_soc_top_sgmii(
     wire s3_req_vld_o;
     wire s3_rsp_rdy_o;
     wire s3_we_o;
-
+ 
     // slave 4 interface
     wire[31:0] s4_data_i;
     wire s4_req_rdy_i;
@@ -378,6 +391,27 @@ module tinyriscv_soc_top_sgmii(
         .reg_data(gpio_data)
     );
 
+// // I2C Wrapper的输入输出信号
+// wire scl_o, scl_t, sda_o, sda_t;
+// wire scl_i, sda_i;
+
+// // 使用IOBUF原语
+// // SCL引脚
+// IOBUF scl_iobuf (
+//     .I    (scl_o),   // 从Wrapper到IO
+//     .O    (scl_i),   // 从IO到Wrapper
+//     .T    (scl_t),   // Wrapper的三态控制信号
+//     .IO   (i2c_scl) // 连接到FPGA物理引脚
+// );
+
+// // SDA引脚
+// IOBUF sda_iobuf (
+//     .I    (sda_o),
+//     .O    (sda_i),
+//     .T    (sda_t),
+//     .IO   (i2c_sda)
+// );
+
 // 实例化修正后的Wrapper
 i2c_controller u_i2c (
     // RIB总线接口
@@ -387,12 +421,19 @@ i2c_controller u_i2c (
     .data_i(s5_data_o),
     .sel_i(s5_sel_o),
     .we_i(s5_we_o),
-    .data_o(s5_data_i),      // 向总线提供读数据
-    .req_valid_i(s5_req_vld_o), // 从总线接收请求有效信号
-    .req_ready_o(s5_req_rdy_i), // 向总线提供就绪信号
-    .rsp_valid_o(s5_rsp_vld_i), // 向总线提供响应有效信号
+    .data_o(s5_data_i),      // 向总线提供读数据 
+    .req_valid_i(s5_req_vld_o), // 从总线接收请求有效信号 
+    .req_ready_o(s5_req_rdy_i), // 向总线提供就绪信号 
+    .rsp_valid_o(s5_rsp_vld_i), // 向总线提供响应有效信号 
     .rsp_ready_i(s5_rsp_rdy_o),
 
+    // // I2C物理引脚接口 (连接到IOBUF)
+    // .scl_i(scl_i),
+    // .scl_o(scl_o),
+    // .scl_t(scl_t),
+    // .sda_i(sda_i),
+    // .sda_o(sda_o),
+    // .sda_t(sda_t)
     .io_scl(i2c_scl),
     .io_sda(i2c_sda)
 );
@@ -419,36 +460,50 @@ i2c_controller u_i2c (
         .spi_csn(spi_csn)
     );
 
-    parameter ADC_WIDTH = 32;
-    parameter DATAWIDTH = 32;
-    parameter REAL_DATA_WIDTH = 64;
-    parameter REAL_DATA_CHANEL= 1;
-            // 计算每个物理通道被拆分成了多少个32bit数据块
-        // 例如 128 / 32 = 4 个数据块
-        localparam CHUNKS_PER_PHY = REAL_DATA_WIDTH / DATAWIDTH;
-
-        // 计算每个物理通道占用的逻辑通道总数 (数据块 + 1个包头)
-    parameter ADC_CHANEL =( CHUNKS_PER_PHY + 1)*REAL_DATA_CHANEL;
-    parameter IsSplitData = (CHUNKS_PER_PHY==1'b0)?1'b0:1'b1;
-
-    (* MARK_DEBUG="true" *)wire  [REAL_DATA_WIDTH*REAL_DATA_CHANEL-1:0]adc_data_1;
+    (* MARK_DEBUG="true" *)wire  [ADC_WIDTH*ADC_CHANEL-1:0]adc_data_1;
     (* MARK_DEBUG="true" *)wire  data_ready_out_1;
-
+/*
     sipo_converter #(.DATA_WIDTH(REAL_DATA_WIDTH*REAL_DATA_CHANEL)) sipo_a (
         .clk(clk), .rst_n(rst_n),
         .data_valid_in(data_valid_in), .serial_data_in(serial_data_in),
         .parallel_data_out(adc_data), .data_ready_out(data_ready_out)
     );
-    assign adc_data_1 = adc_data;
-    assign data_ready_out_1 =  data_ready_out;
+
+     sipo_converter #(.DATA_WIDTH(REAL_DATA_WIDTH*REAL_DATA_CHANEL)) sipo_a (
+        .clk(clk), .rst_n(rst_n),
+        .data_valid_in(data_valid_in), .serial_data_in(serial_data_in),
+        .parallel_data_out(adc_data), .data_ready_out(data_ready_out)
+    );*/
+    wire [15:0]time_diff_ps_out;
+    wire [17:0]data_flag;
+      top_dual_channel_analysis #(
+        .MATCH_WINDOW_PS (64'd50000), // Relaxed window for testing (10ns)
+        .FIFO_DEPTH      (64)
+    ) dut (
+        .clk_fast       (clk_fast),
+        .clk_sys        (clk),
+        .rst_n          (rst_n),
+        
+        .ch1_data_in    (ch1_data_in),
+        .ch1_data_valid (ch1_data_valid),
+        
+        .ch2_data_in    (ch2_data_in),
+        .ch2_data_valid (ch2_data_valid),
+        
+        .match_valid_out(data_ready_out_1),
+        .time_diff_ps_out(time_diff_ps_out),
+        .data_flag      (data_flag),
+        .ch1_decode_error(ch1_decode_err),
+        .ch2_decode_error(ch2_decode_err)
+    );
+
+    assign adc_data_1 = {ch2_decode_err,data_flag[17:9],ch1_decode_err,data_flag[8:0],4'b0,time_diff_ps_out};
+    
 
     // DAQ_UDP_top SGMII version
     DAQ_UDP_top_sgmii #(
-        .ADC_WIDTH(ADC_WIDTH),      // ADC数据宽度
-        .DATAWIDTH(DATAWIDTH),      // 内部数据处理宽度
-        .REAL_DATA_WIDTH(REAL_DATA_WIDTH),
-        .REAL_DATA_CHANEL(REAL_DATA_CHANEL),
-        .IsSplitData(IsSplitData),
+       .ADC_WIDTH(ADC_WIDTH),
+        .DATAWIDTH(DATAWIDTH),
         .ADC_CHANEL(ADC_CHANEL)
     ) u_DAQ_UDP_top_inst (
         // 时钟和复位
