@@ -71,9 +71,7 @@ module DAQ_UDP_top_sgmii #(
     wire udp_tx_done;
     wire tx_req;
     wire udp_busy;
-
-    // Assignments
-    assign eth_rst_n = rst_n;
+    wire ctrl_udp_tx_enable = ~fifo_empty;  // Transmit when FIFO has data
     // 如果 adc_data_ready 有效则采样，否则为0
     assign adc_data_dly = adc_data_ready ? rec_ADC_data : {ADC_CHANEL*ADC_WIDTH{1'b0}};
 

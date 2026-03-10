@@ -476,6 +476,8 @@ i2c_controller u_i2c (
     );*/
     wire [15:0]time_diff_ps_out;
     wire [17:0]data_flag;
+    wire ch1_decode_err;
+    wire ch2_decode_err;
       top_dual_channel_analysis #(
         .MATCH_WINDOW_PS (64'd50000), // Relaxed window for testing (10ns)
         .FIFO_DEPTH      (64)
